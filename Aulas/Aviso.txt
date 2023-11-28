@@ -1,0 +1,82 @@
+
+Criar projeto React:
+npx create-react-app <nome do projeto>
+
+Rodar o arquivo via react
+npm start 
+
+criar projeto com vite
+npm create vite@latest
+1 - coloca o nome do projeto
+2 - escolhe o framework
+3 - escolher a linguagem
+
+Rodar com o react vite
+npm run dev
+
+OBS: A pasta do projeto precosa estar aberta no terminal
+
+
+
+
+
+Aviso importante sobre componentes do React JS
+Fala galera!
+
+Para evitar problemas de compilação do código.
+
+Peco que façam a alteração da extensão dos arquivos de cada componente para jsx.
+
+A versão atual do React não aceita mais a extensão js em arquivos de componentes.
+
+Como o curso já tem certa idade, naquela época era comum criar componentes com js, depois o jsx veio a ser o padrão.
+
+Bom curso!
+
+Indicações de Livros
+Fala galera, beleza?
+
+
+
+Muita gente pede indicações de livros para complementar os estudos, então fiz uma curadoria para este curso e vou indicar alguns
+
+
+
+Primeiramente um livro que tem muita relação com este curso, meu mais recente ebook de React:
+
+
+
+Fundamentos do React JS: Aprenda a bilioteca mais famosa de front-end através de exercícios e projetos - https://amzn.to/3SsOS0E
+
+
+Este livro de minha autoria, é repeleto de exercícios e projetos, para você dominar os fundamentos de JavaScript em mais de 100 páginas e com precinho camarada ou 0800 pelo Kindle Unlimited:
+
+
+
+JavaScript para Iniciantes - Aprenda a Programar JS de Forma Simples - https://amzn.to/3Q1kU2h
+
+
+Outro livro de minha autoria é o:
+
+
+
+200 Exercícios de JavaScript: Fortaleça suas habilidades com desafios - https://amzn.to/3Zs49QR
+
+
+Ele é inteiramente baseado em exercícios, com mais de 200, para você reforçar e aprender todos os aspectos de JS de forma prática.
+
+
+
+JavaScript: O Guia Definitivo - https://amzn.to/3MJOMyE
+
+
+
+React - Aprenda Praticando - https://amzn.to/3GL199O
+
+
+
+Todos eles complementam o conteúdo de alguma forma, para você conseguir evoluir mais rápido
+
+
+
+Bom estudo para vocês! 🙂

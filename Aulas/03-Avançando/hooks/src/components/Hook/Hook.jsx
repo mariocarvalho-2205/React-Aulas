@@ -5,6 +5,7 @@ const Hook = () => {
     console.log(numData)
 
     let [number, setNumber] = useState(30)
+    let [ num, setNum ] = useState(2)
 
     return (
         <div>
@@ -30,6 +31,8 @@ const Hook = () => {
             <button onClick={() => numData = 25}>Muda a variavel</button>
             <h4>Valor do state {number}</h4>
             <button onClick={() => setNumber(number + 1)}>Muda a variavel</button>
+            <h4>Valor do state {num}</h4>
+            <button onClick={() => setNum(num + num)}>Muda a variavel</button>
         </div>
     )
 }

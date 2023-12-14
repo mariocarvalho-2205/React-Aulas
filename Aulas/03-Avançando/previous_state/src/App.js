@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './App.css';
+import FuncaoInicializadora from "./components/FuncaoInicializadora";
 
 function App() {
   const [ num, setNum] = useState(0);
@@ -149,14 +150,15 @@ const deleteRandom = () => {
           }}
         />
       </label>
-
       <h2>Form Person</h2>
-      <h4>{person.nome} {person.caracteristicas.idade} {person.caracteristicas.sexo}</h4>
+      <h4>
+        {person.nome} {person.caracteristicas.idade}{" "}
+        {person.caracteristicas.sexo}
+      </h4>
       <label htmlFor="">
         Nome Person:
         <input type="text" value={person.nome} onChange={changeNamePerson} />
       </label>
-
       <label htmlFor="">
         Caracteristicas Person Idade
         <input
@@ -165,7 +167,6 @@ const deleteRandom = () => {
           onChange={changeIdadePerson}
         />
       </label>
-
       <label htmlFor="">
         Caracteristicas Person Sexo
         <input
@@ -174,6 +175,9 @@ const deleteRandom = () => {
           onChange={changeSexoPerson}
         />
       </label>
+      <hr />
+      <FuncaoInicializadora/>
+
     </div>
   );
 }

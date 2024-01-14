@@ -4,12 +4,15 @@ const UserDetails = ({ nome, idade, profissao }) => {
   return (
     <>
         <ul>
-            <li>Nome: {nome}</li>
-            <li>Idade: {idade}</li>
-            <li>Profissão: {profissao}</li>
-            {idade > 18 && <li>Apto para dirigir </li>}
+            <h2>Nome: {nome}</h2>
+            <p>Idade: {idade}</p>
+            <p>Profissão: {profissao}</p>
+            {idade >= 18 ? (
+              <p style={{color: 'green'}}><b>Apto para tirar a carteira.</b></p>
+            ) : (
+              <p style={{color: 'red'}}><b>Ainda não tem idade para tirar carteira</b></p>
+            )}
             <hr />
-            
         </ul>
     </>
   )

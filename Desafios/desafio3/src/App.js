@@ -1,11 +1,38 @@
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import UserDetails from "./component/UserDetails";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Seção 03</h1>
-    </div>
-  );
+	const [persons] = useState([
+		{
+			nome: "Joao",
+			idade: 35,
+			profissao: "Contador",
+		},
+		{
+			nome: "maria",
+			idade: 17,
+			profissao: "Professora",
+		},
+		{
+			nome: "Jose",
+			idade: 28,
+			profissao: "Engenheiro",
+		},
+	]);
+
+	return (
+		<div className="App">
+			{persons.map((person, index) => (
+				<UserDetails
+					key={index}
+					nome={person.nome}
+					idade={person.idade}
+					profissao={person.profissao}
+				/>
+			))}
+		</div>
+	);
 }
 
 export default App;

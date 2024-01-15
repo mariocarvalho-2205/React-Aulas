@@ -1,0 +1,13 @@
+form {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+}
+
+label {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 20px;
+    color: red;
+}

@@ -1,8 +1,20 @@
 .container {
-    display: flex;
-    justify-content: center;
+    border: 1px solid #fff;
+    width: 150px;
+    border-radius: 20px;
 }
 
-.div_listcars h1{
-    color: blue;
+
+
+.semi_novo {
+    color: green;
 }
+
+.usado {
+    color: orange;
+}
+
+.antigo {
+    color: red;
+}
+

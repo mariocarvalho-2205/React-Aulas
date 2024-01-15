@@ -9,19 +9,19 @@ function App() {
       id: 1,
       marca: "Ford",
       modelo: "Fiesta",
-      ano: 2010,
+      ano: 2017,
     },
     {
       id: 2,
       marca: "Fiat",
       modelo: "Palio",
-      ano: 2010,
+      ano: 2021,
     },
     {
       id: 3,
       marca: "GM",
       modelo: "Astra",
-      ano: 2010,
+      ano: 2023,
     },
     {
       id: 4,
@@ -34,10 +34,13 @@ function App() {
   return (
     <>
       <h1 className='title_app'>Carros a Venda</h1>
-      {cars.map((car) => (
-        <ListCars key={car.id} marca={car.marca} modelo={car.modelo} ano={car.ano}/>
+      <div className='car_container'>
+        {cars.map((car) => (
+          <ListCars key={car.id} marca={car.marca} modelo={car.modelo} ano={car.ano}/>
 
-      ))}
+        ))}
+
+      </div>
 
     </>
   )

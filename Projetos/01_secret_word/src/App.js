@@ -1,10 +1,10 @@
-import './App.css';
+import * as S from './App.styles.js'
 
 function App() {
   return (
-    <div className="App">
-      <h1>teste</h1>
-    </div>
+    <S.App>
+      <h1>Secret Word</h1>
+    </S.App>
   );
 }
 

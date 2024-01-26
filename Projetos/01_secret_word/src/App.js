@@ -1,11 +1,13 @@
-import * as S from './App.styles.js'
+import StartScreen from "../src/components/StartScreen/index.jsx";
+import GlobalStyle from "./global.js";
 
 function App() {
-  return (
-    <S.App>
-      <h1>Secret Word</h1>
-    </S.App>
-  );
+	return (
+		<>
+			<GlobalStyle />
+			<StartScreen />
+		</>
+	);
 }
 
 export default App;

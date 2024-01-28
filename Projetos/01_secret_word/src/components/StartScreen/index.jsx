@@ -1,12 +1,12 @@
 import * as S from './styles';
 import Button from '../Button/Button'
 
-const StartScreen = () => {
+const StartScreen = ({ startGame }) => {
     return (
         <S.Container>
             <S.Title>Secret Word</S.Title>
             <S.TextP>Clique no botão abaixo para começãr a jogar</S.TextP>
-            <Button />
+            <Button startGame={startGame}/>
         </S.Container>
 
     )

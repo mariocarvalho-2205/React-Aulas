@@ -1,11 +1,12 @@
 import * as S from './styles'
+import Button from '../Button/Button'
 
-const GameOver = ( ) => {
+const Game = ({ startGame, value }) => {
     return (
         <>
-        Game
+        <Button startGame={startGame} value={value}/>
         </>
     )
 }
 
-export default GameOver
+export default Game

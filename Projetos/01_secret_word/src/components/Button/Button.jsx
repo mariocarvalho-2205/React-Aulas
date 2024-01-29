@@ -1,9 +1,9 @@
 import * as S from "./styles";
 
-const Button = ( { startGame }) => {
+const Button = ( { startGame, value }) => {
 	return (
 		<>
-			<S.Button onClick={startGame}>Começar o jogo</S.Button>
+			<S.Button onClick={startGame}>{value}</S.Button>
 		</>
 	);
 };

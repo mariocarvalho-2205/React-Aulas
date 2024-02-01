@@ -55,5 +55,6 @@ export const LetterContainer = styled.div`
         font-size: 2em;
         text-align: center;
         margin-right: 1em;
+        color: #000;
     }
 `;

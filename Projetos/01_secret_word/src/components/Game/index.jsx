@@ -15,16 +15,16 @@ const Game = ({
   score,
 }) => {
   const [letter, setLetter] = useState("");
-  const LetterInputRef = useRef(null)
+  const LetterInputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    verifyLetter(letter)
-	setLetter("")
+    verifyLetter(letter);
+    console.log(" handle submit " + letter)
+    setLetter("");
 
-	LetterInputRef.current.focus() // retorna o input para uma nova digitação
-    
-  }
+    LetterInputRef.current.focus(); // retorna o input para uma nova digitação
+  };
   return (
     <S.Game>
       <p className="points">
@@ -56,7 +56,7 @@ const Game = ({
             required
             onChange={(e) => setLetter(e.target.value)}
             value={letter}
-			ref={LetterInputRef}
+            ref={LetterInputRef}
           />
           <Button value="Jogar!" />
         </form>

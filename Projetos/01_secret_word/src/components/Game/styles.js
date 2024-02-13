@@ -58,3 +58,11 @@ export const LetterContainer = styled.div`
         color: #000;
     }
 `;
+
+export const WrongContainer = styled.div`
+    margin: 1em;
+
+    p {
+        margin-bottom: 1.2em;
+    }
+`;

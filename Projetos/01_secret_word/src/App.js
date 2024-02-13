@@ -71,7 +71,6 @@ function App() {
       guessedLetters.includes(normalizedLetter) ||
       wrongLetters.includes(normalizedLetter)
     ) {
-      console.log(normalizedLetter + ' if app normalized')
       return;
     }
 
@@ -83,8 +82,8 @@ function App() {
 
     
     } else {
-      setWrongLetters((actualGuessedLetters) => [
-        ...actualGuessedLetters,
+      setWrongLetters((actualWrongLetters) => [
+        ...actualWrongLetters,
         normalizedLetter,
       ]);
     }

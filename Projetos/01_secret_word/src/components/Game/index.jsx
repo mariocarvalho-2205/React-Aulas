@@ -61,12 +61,12 @@ const Game = ({
           <Button value="Jogar!" />
         </form>
       </S.LetterContainer>
-      <div className="wrongLettersContainer">
+      <S.WrongContainer>
         <p>Letras já utilizadas</p>
         {wrongLetters.map((letter, i) => (
           <span key={i}>{letter}</span>
         ))}
-      </div>
+      </S.WrongContainer>
       <Button startGame={startGame} value={value} />
     </S.Game>
   );

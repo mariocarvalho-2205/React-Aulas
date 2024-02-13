@@ -20,7 +20,7 @@ const Game = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     verifyLetter(letter);
-    console.log(" handle submit " + letter)
+    console.log(" handle submit " + letter);
     setLetter("");
 
     LetterInputRef.current.focus(); // retorna o input para uma nova digitação
@@ -52,7 +52,7 @@ const Game = ({
           <input
             type="text"
             name="letter"
-            // maxLength="1"
+            maxLength="1"
             required
             onChange={(e) => setLetter(e.target.value)}
             value={letter}
@@ -66,7 +66,6 @@ const Game = ({
         {wrongLetters.map((letter, i) => (
           <span key={i}>{letter}</span>
         ))}
-        <span>b, </span>
       </div>
       <Button startGame={startGame} value={value} />
     </S.Game>

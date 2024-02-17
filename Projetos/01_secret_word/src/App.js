@@ -66,7 +66,7 @@ function App() {
   // process the letter input
   const verifyLetter = (letter) => {
     const normalizedLetter = letter.toLowerCase();
-
+    console.log(letters)
     if (
       guessedLetters.includes(normalizedLetter) ||
       wrongLetters.includes(normalizedLetter)
@@ -86,6 +86,8 @@ function App() {
         ...actualWrongLetters,
         normalizedLetter,
       ]);
+
+      setGuesses((actualGuesses) => actualGuesses - 1)
     }
   };
   console.log(guessedLetters + ' guessed');

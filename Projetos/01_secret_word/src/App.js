@@ -87,9 +87,19 @@ function App() {
         normalizedLetter,
       ]);
 
+      // diminue as tentativas
       setGuesses((actualGuesses) => actualGuesses - 1)
     }
   };
+
+  useEffect(() => {
+    // reset all states
+
+    if (guesses <=0) {
+      setGameStage(stages[2].name)
+    }
+
+  }, [guesses])
   console.log(guessedLetters + ' guessed');
   console.log(wrongLetters + ' wrong')
 

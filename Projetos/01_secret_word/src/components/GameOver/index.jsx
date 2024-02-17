@@ -1,14 +1,14 @@
 import React from 'react'
 import Button from '../Button/Button'
-import * as S from 'styled-components'
+import * as S from './styles'
 
 
 const GameOver = ({ startGame, value }) => {
   return (
-    <div>
-      GameOver
+    <S.Container>
+      <S.Tilte>GameOver</S.Tilte> 
       <Button startGame={startGame} value={value}/>
-    </div>
+    </S.Container>
   )
 }
 

@@ -142,7 +142,7 @@ function App() {
         />
       )}
       {gameStage === "end" && (
-				<GameOver startGame={retry} value="Reset Game" />
+				<GameOver startGame={retry} value="Reset Game" score={score}/>
 			)}
     </>
   );

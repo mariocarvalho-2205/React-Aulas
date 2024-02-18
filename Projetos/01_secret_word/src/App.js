@@ -116,22 +116,22 @@ function App() {
   // console.log(wrongLetters + ' wrong')
 
 
-  // check win condition verifica as letras repetidas
-  useEffect(() => {
-    const uniqueLetters = [...new Set(letters)];
+  // // check win condition verifica as letras repetidas
+  // useEffect(() => {
+  //   const uniqueLetters = [...new Set(letters)];
 
-    console.log(uniqueLetters)
-     if (guessedLetters.length === uniqueLetters.length) {
-        console.log('winner')
-        setScore((actualScore) => actualScore += 100) // adiciona pontuação ao score
-
-
-        // reset game with new game
-        startGame();
-     }
+  //   console.log(uniqueLetters)
+  //    if (guessedLetters.length === uniqueLetters.length) {
+  //       console.log('winner')
+  //       setScore((actualScore) => actualScore += 100) // adiciona pontuação ao score
 
 
-  }, [guessedLetters])
+  //       // reset game with new game
+  //       startGame();
+  //    }
+
+
+  // }, [guessedLetters])
 
   // restart the game
   const retry = () => {

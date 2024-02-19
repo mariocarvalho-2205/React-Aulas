@@ -60,7 +60,7 @@ function App() {
     setPickedWord(word);
     setPickedCategory(category);
     setLetters(wordLetters);
-
+    setScore(0)
     setGameStage(stages[1].name);
   };
   // console.log(words)
@@ -100,13 +100,14 @@ function App() {
   }
 
   useEffect(() => {
-    // reset all states
-
+    
     if (guesses <=0) {
+      
+      // reset all states
+      clearLetterStates()
 
       setGameStage(stages[2].name)
 
-      clearLetterStates()
     }
 
   }, [guesses])
@@ -117,21 +118,19 @@ function App() {
 
 
   // // check win condition verifica as letras repetidas
-  // useEffect(() => {
-  //   const uniqueLetters = [...new Set(letters)];
+useEffect(() => {
+  const uniqueLetters = [... new Set(letters)]
 
-  //   console.log(uniqueLetters)
-  //    if (guessedLetters.length === uniqueLetters.length) {
-  //       console.log('winner')
-  //       setScore((actualScore) => actualScore += 100) // adiciona pontuação ao score
-
+  // console.log(uniqueLetters)  // // funcionando 
+ if (guessedLetters.length === uniqueLetters.length) {
+  console.log('iguais')
+  setScore((actualScore) => actualScore + 50)
+ }
 
   //       // reset game with new game
-  //       startGame();
-  //    }
 
+}, [guessedLetters])
 
-  // }, [guessedLetters])
 
   // restart the game
   const retry = () => {

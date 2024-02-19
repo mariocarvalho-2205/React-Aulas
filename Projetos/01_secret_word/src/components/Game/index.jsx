@@ -67,7 +67,7 @@ const Game = ({
           <span key={i}>{letter}</span>
         ))}
       </S.WrongContainer>
-      <Button startGame={startGame} value={value} />
+      {/* <Button startGame={startGame} value={value} /> */}
     </S.Game>
   );
 };

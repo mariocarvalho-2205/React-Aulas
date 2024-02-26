@@ -1,0 +1,67 @@
+{
+  "cars": [
+    {
+      "id": "1",
+      "marca": "Fiat",
+      "modelo": "Argo",
+      "ano": 2024,
+      "price": 45000
+    },
+    {
+      "id": "2",
+      "marca": "GM",
+      "modelo": "Onix",
+      "ano": 2019,
+      "price": 32000
+    },
+    {
+      "id": "3",
+      "marca": "Volkswagen",
+      "modelo": "Golf",
+      "ano": 2018,
+      "price": 27000
+    },
+    {
+      "id": "4",
+      "marca": "Forf",
+      "modelo": "Focus",
+      "ano": 2015,
+      "price": 15000
+    },
+    {
+      "id": "3d7b",
+      "marca": "BMW",
+      "modelo": "M1",
+      "ano": "2021",
+      "price": "150012"
+    },
+    {
+      "id": "23ec",
+      "marca": "Ferrari",
+      "modelo": "Enzo",
+      "ano": "2024",
+      "price": "2000000.55"
+    },
+    {
+      "id": "87d3",
+      "marca": "Hyundai",
+      "modelo": "HB20",
+      "ano": "2020",
+      "price": "17850"
+    },
+    {
+      "id": "1438",
+      "marca": "Hyundai",
+      "modelo": "Creta",
+      "ano": "2021",
+      "price": "35000"
+    },
+    {
+      "id": "5a6a",
+      "marca": "Ford",
+      "modelo": "New Fiesta",
+      "ano": "2014",
+      "price": "35000"
+    }
+  ]
+}

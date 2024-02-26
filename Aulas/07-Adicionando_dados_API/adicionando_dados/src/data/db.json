@@ -62,6 +62,13 @@
       "modelo": "New Fiesta",
       "ano": "2014",
       "price": "35000"
+    },
+    {
+      "id": "749d",
+      "marca": "GM",
+      "modelo": "Chevette",
+      "ano": "1985",
+      "price": "10000"
     }
   ]
 }

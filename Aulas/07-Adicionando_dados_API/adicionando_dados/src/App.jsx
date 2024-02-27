@@ -1,30 +1,36 @@
 import { useState, useEffect } from "react"
 
+// import custom hook
+import { useFetch } from "./hooks/useFetch"
+
 import './App.css'
+const url = "http://localhost:3000/cars";
 
 function App() {
 
   const [cars, setCars ] = useState([]);
+
+  // custom hook
+  const { data: items } = useFetch(url);
 
   const [ marca, setMarca ] = useState("");
   const [ modelo, setModelo ] = useState("");
   const [ ano, setAno ] = useState("");
   const [ price, setPrice ] = useState("");
 
-  const url = "http://localhost:3000/cars";
+// // regatando dados
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch(url);
+  //     const data = await response.json();
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(url);
-      const data = await response.json();
+  //     setCars(data);
 
-      setCars(data);
+  //   }
 
-    }
-
-    fetchData();
-    console.log(cars);
-  }, [])
+  //   fetchData();
+  //   console.log(cars);
+  // }, [])
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,7 +70,7 @@ function App() {
     <div className="container">
       <h1>Relação de Carros</h1>
       <ul>
-        {cars.map(car => (
+        {items && items.map(car => (
           <li key={car.id}>{car.marca} - {car.modelo} - {car.ano} - R$ {car.price}</li>
         ))}
       </ul>

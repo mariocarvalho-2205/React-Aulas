@@ -1,0 +1,24 @@
+{
+  "cars": [
+    {
+      "marca": "Ford",
+      "modelo": "Fiesta",
+      "id": "78a3"
+    },
+    {
+      "id": "af82",
+      "marca": "Fiat",
+      "modelo": "Argo"
+    },
+    {
+      "id": "7e77",
+      "marca": "Ferrari",
+      "modelo": "Enzo"
+    },
+    {
+      "id": "22aa",
+      "marca": "Ferrari",
+      "modelo": "Enzo"
+    }
+  ]
+}

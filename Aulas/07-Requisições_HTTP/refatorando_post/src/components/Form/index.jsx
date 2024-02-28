@@ -37,7 +37,11 @@ const Form = () => {
 	return (
 		<div>
 			<h1>Relação de Items</h1>
-			<ul></ul>
+			<ul>
+				{items && items.map((item) => (
+					<li key={item.id}>{item.marca} - {item.modelo}</li>	
+					))}
+			</ul>
 
 			<form onSubmit={handleSubmit}>
 				<label>

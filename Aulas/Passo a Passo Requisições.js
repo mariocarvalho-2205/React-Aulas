@@ -77,6 +77,7 @@
         ? })
 
         // Carregamento dinamico no componente
+        ? const addedNome_do_objeto = await res.json()
         ? setNome_do_objeto((nome_do_objeto) => [...nome_do_objeto, nome_do_objeto])
 
         // depois do carregamento dinamico resetamos os states depois do envio para o sistema

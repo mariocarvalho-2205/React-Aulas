@@ -3,7 +3,7 @@ import React from 'react'
 const Form = () => {
   return (
     <div>
-        <h1>Relação de Carros</h1>
+        <h2>Cadastro de Novos Carros</h2>
     </div>
   )
 }

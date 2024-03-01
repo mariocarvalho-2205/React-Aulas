@@ -1,9 +1,34 @@
 {
-    "cars": [
-        {
-            "id": 1,
-            "marca": "BMW",
-            "modelo": "X5"
-        }
-    ]
+  "cars": [
+    {
+      "id": "1",
+      "marca": "BMW",
+      "modelo": "X5"
+    },
+    {
+      "id": "842c",
+      "marca": "Ferrari",
+      "modelo": "Enzo"
+    },
+    {
+      "id": "1b06",
+      "marca": "Ferrari",
+      "modelo": "Enzo"
+    },
+    {
+      "id": "4850",
+      "marca": "Hyundai",
+      "modelo": "HB20"
+    },
+    {
+      "id": "a13a",
+      "marca": "Ford",
+      "modelo": "New Fiesta"
+    },
+    {
+      "id": "6ca3",
+      "marca": "GM",
+      "modelo": "M"
+    }
+  ]
 }

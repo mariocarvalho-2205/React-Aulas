@@ -29,6 +29,26 @@
       "id": "6ca3",
       "marca": "GM",
       "modelo": "M"
+    },
+    {
+      "id": "6492",
+      "marca": "BYD",
+      "modelo": "New"
+    },
+    {
+      "id": "6cc0",
+      "marca": "BMW",
+      "modelo": "M1"
+    },
+    {
+      "id": "a752",
+      "marca": "Ferrari",
+      "modelo": "f1"
+    },
+    {
+      "id": "470c",
+      "marca": "BMW",
+      "modelo": "X1"
     }
   ]
 }

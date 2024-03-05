@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useFetch } from "../../hooks/useFetch"
 import "./styles.css"
 
 const url = "http://localhost:3000/cars"
@@ -9,24 +10,26 @@ const Form = () => {
     const [marca, setMarca] = useState("")
     const [modelo, setModelo] = useState("")
 
+    // 4 custom hook
+    const { data: items } = useFetch(url)
 
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // 1 usando useEffect para inicio
-    useEffect(() => {
-        // o useEffect nao aceita async, precisa fazer uma function
-        // asincrona dentro do useEffect
-        async function fetchData() {
-            const res = await fetch(url)
+    // useEffect(() => {
+    //     // o useEffect nao aceita async, precisa fazer uma function
+    //     // asincrona dentro do useEffect
+    //     async function fetchData() {
+    //         const res = await fetch(url)
 
-            const data = await res.json()
+    //         const data = await res.json()
 
-            setCars(data)
-        }
+    //         setCars(data)
+    //     }
 
-        fetchData()
+    //     fetchData()
 
-    }, [])
+    // }, [])
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     const handleSubmit = async (e) => {
@@ -59,7 +62,7 @@ const Form = () => {
         <div>
             <h2>Cadastro de Novos Carros</h2>
             <ul>
-                {cars.map((car) => (
+                {items && items.map((car) => (
                     <li key={car.id}>{car.marca} - {car.modelo}</li>
                 ))}
             </ul>

@@ -56,9 +56,24 @@
       "modelo": "Evoque"
     },
     {
-      "id": "4b1d",
+      "id": "f3b7",
       "marca": "Land Rover",
       "modelo": "Range Rover"
+    },
+    {
+      "id": "49aa",
+      "marca": "Ford",
+      "modelo": "Fusion"
+    },
+    {
+      "id": "8d3a",
+      "marca": "Ford",
+      "modelo": "Fusion"
+    },
+    {
+      "id": "e67c",
+      "marca": "GM",
+      "modelo": "celta"
     }
   ]
 }

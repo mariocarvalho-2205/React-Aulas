@@ -1,3 +1,4 @@
+import { set } from "mongoose";
 import { useState, useEffect } from "react";
 
 const url = "http://localhost:3000/cars"
@@ -10,6 +11,9 @@ export const useFetch = () => {
     const [ config, setConfig ] = useState(null);
     const [ method, setMethod ] = useState(null);
     const [ callFetch, setCallFetch ] = useState(null);
+
+    // 6 loading
+    const [ loading, setLoading ] = useState(false)
 
     const httpConfig = (data, method) => {
 
@@ -30,11 +34,17 @@ export const useFetch = () => {
     useEffect(() => {
 
         const fetchData = async () => {
+
+            // 6 loading
+            setLoading(true)
+
             const res = await fetch(url)
 
             const json = await res.json()
 
             setData(json)
+
+            setLoading(false)
         }
 
         fetchData()
@@ -58,6 +68,6 @@ export const useFetch = () => {
         httpRequest()
     }, [config, method, url])
 
-    return { data, httpConfig }
+    return { data, httpConfig, loading }
 
 }

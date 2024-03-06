@@ -1,0 +1,84 @@
+{
+  "cars": [
+    {
+      "id": "1",
+      "marca": "BMW",
+      "modelo": "X5"
+    },
+    {
+      "id": "4850",
+      "marca": "Hyundai",
+      "modelo": "HB20"
+    },
+    {
+      "id": "a13a",
+      "marca": "Ford",
+      "modelo": "New Fiesta"
+    },
+    {
+      "id": "6ca3",
+      "marca": "GM",
+      "modelo": "M"
+    },
+    {
+      "id": "6492",
+      "marca": "BYD",
+      "modelo": "New"
+    },
+    {
+      "id": "6cc0",
+      "marca": "BMW",
+      "modelo": "M1"
+    },
+    {
+      "id": "a752",
+      "marca": "Ferrari",
+      "modelo": "f1"
+    },
+    {
+      "id": "470c",
+      "marca": "BMW",
+      "modelo": "X1"
+    },
+    {
+      "id": "d1b5",
+      "marca": "Land Rover",
+      "modelo": "Evoque"
+    },
+    {
+      "id": "f3b7",
+      "marca": "Land Rover",
+      "modelo": "Range Rover"
+    },
+    {
+      "id": "e67c",
+      "marca": "GM",
+      "modelo": "celta"
+    },
+    {
+      "id": "d016",
+      "marca": "Toyota",
+      "modelo": "Hilux"
+    },
+    {
+      "id": "98cd",
+      "marca": "Ford",
+      "modelo": "Focus"
+    },
+    {
+      "id": "6901",
+      "marca": "Hyundai",
+      "modelo": "Creta"
+    },
+    {
+      "id": "c673",
+      "marca": "BMW",
+      "modelo": "M3"
+    },
+    {
+      "id": "3efc",
+      "marca": "Mitsubish",
+      "modelo": "EVO"
+    }
+  ]
+}

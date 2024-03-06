@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useFetch } from "../../hooks/useFetch"
 import "./styles.css"
 
@@ -11,7 +11,7 @@ const Form = () => {
     const [modelo, setModelo] = useState("")
 
     // 4 custom hook
-    const { data: items } = useFetch(url)
+    const { data: items, httpConfig } = useFetch(url)
 
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -41,19 +41,21 @@ const Form = () => {
         };
         // console.log(cars)
 
-        // 2 requisição
-        const res = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(cars)
-        })
+        // // 2 requisição
+        // const res = await fetch(url, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(cars)
+        // })
 
-        // 3 adicionamento dinamico
-        const addedCars = await res.json()
+        // // 3 adicionamento dinamico
+        // const addedCars = await res.json()
 
-        setCars((prevCars) => [...prevCars, addedCars])
+        // setCars((prevCars) => [...prevCars, addedCars])
+
+        httpConfig(cars, "POST")
         setMarca("")
         setModelo("")
     }

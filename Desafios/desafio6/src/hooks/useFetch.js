@@ -1,4 +1,3 @@
-import { set } from "mongoose";
 import { useState, useEffect } from "react";
 
 const url = "http://localhost:3000/cars"
@@ -18,6 +17,9 @@ export const useFetch = () => {
     // 7 tratando erros
     const [ error, setError ] = useState(null);
 
+    const [itemId, setItemId] = useState(null);
+
+
     const httpConfig = (data, method) => {
 
         if ( method === "POST" ) {
@@ -30,6 +32,17 @@ export const useFetch = () => {
             })
 
             setMethod(method)
+            // incluindo o metodo delete na configuração do fetch
+        } else if ( method === "DELETE") {
+            setConfig({
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+            setMethod(method)
+            setItemId(data)
+
         }
     }
 
@@ -63,17 +76,26 @@ export const useFetch = () => {
     // 5 refatorando post
     useEffect(() => {
         const httpRequest = async () => {
+
+            let json
+
             if ( method === "POST") {
                 let fetchOptions = [url, config];
 
                 const res = await fetch(...fetchOptions);
 
-                const json = await res.json();
+                json = await res.json();
 
-                setCallFetch(json)
-
+                // incluso o methodo para deletar na requisição
+            } else if ( method === "DELETE") {
+                const deleteUrl = `${url}/${itemId}`;
+                
+                const res = await fetch(deleteUrl, config)
+                json = await res.json()
+                
             }
-        }
+            setCallFetch(json)
+        } 
 
         httpRequest()
     }, [config, method, url])

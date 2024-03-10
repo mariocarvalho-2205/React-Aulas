@@ -5,7 +5,6 @@ import "./styles.css";
 const url = "http://localhost:3000/cars";
 
 const Form = () => {
-	const [cars, setCars] = useState([]);
 
 	const [marca, setMarca] = useState("");
 	const [modelo, setModelo] = useState("");
@@ -13,23 +12,6 @@ const Form = () => {
 	// 4 custom hook
 	const { data: items, httpConfig, loading, error } = useFetch(url);
 
-	// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-	// 1 usando useEffect para inicio
-	// useEffect(() => {
-	//     // o useEffect nao aceita async, precisa fazer uma function
-	//     // asincrona dentro do useEffect
-	//     async function fetchData() {
-	//         const res = await fetch(url)
-
-	//         const data = await res.json()
-
-	//         setCars(data)
-	//     }
-
-	//     fetchData()
-
-	// }, [])
-	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -38,25 +20,16 @@ const Form = () => {
 			marca,
 			modelo,
 		};
-		// console.log(cars)
 
-		// // 2 requisição
-		// const res = await fetch(url, {
-		//     method: "POST",
-		//     headers: {
-		//         "Content-Type": "application/json"
-		//     },
-		//     body: JSON.stringify(cars)
-		// })
-
-		// // 3 adicionamento dinamico
-		// const addedCars = await res.json()
-
-		// setCars((prevCars) => [...prevCars, addedCars])
 
 		httpConfig(cars, "POST");
 		setMarca("");
 		setModelo("");
+	};
+
+	// função para adicionar o id e o methodo
+	const handleRemove = (id) => {
+		httpConfig(id, "DELETE");
 	};
 
 	return (
@@ -70,6 +43,7 @@ const Form = () => {
 						items.map((car) => (
 							<li key={car.id}>
 								{car.marca} - {car.modelo}
+								<button onClick={() => handleRemove(car.id)}>Excluir</button>
 							</li>
 						))}
 				</ul>

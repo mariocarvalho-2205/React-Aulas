@@ -7,7 +7,7 @@ const Home = () => {
 
     const [ produto, setProduto ] = useState(null)
 
-    const { data: items } = useFetch(url)
+    const { data: items, httpConfig } = useFetch(url)
 
     const [ nome, setNome ] = useState("")
 
@@ -15,23 +15,23 @@ const Home = () => {
         e.preventDefault()
 
         const produtos = {
-            nome
+            nome,
         }
 
-        const res = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(produtos)
-        })
+        // const res = await fetch(url, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(produtos)
+        // })
 
-        const addedProduto = await res.json()
-        setProduto(produto => [...produto, addedProduto])
+        // const addedProduto = await res.json()
+        // setProduto(produtos => [...produtos, addedProduto])
 
-
+        httpConfig(produtos, "POST")
         console.log("chegou")
-        console.log(nome)
+        console.log(produtos)
         setNome("")
     }
 

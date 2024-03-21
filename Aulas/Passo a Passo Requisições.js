@@ -169,7 +169,22 @@
 
 * 19 criando variavel de configuração
  ? const httpConfig = (data, method) => {
-    
- } 
+    // configurando o method
+    ? if (method === "POST") {
+        ? setConfig({
+            ? method,
+            ? headers: {
+                ? "Content-Type": "application/json",
+            ? },
+            ? body: JSON.stringify(data),
+        ? })
+        ? setMethod(method)
+    ? }
+ ?}
+ 
+ // depois de criado exportamos junto com o data do hook
+ ? return { data, httpConfig };
+ // na aplicação, inporta junto com o useFetch o httpConfig
+ ? const { data: items, httpConfig } = useFetch(url)
 
 */

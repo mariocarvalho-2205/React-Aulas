@@ -2,11 +2,22 @@ import { useState, useEffect } from "react";
 
 export const useFetch = (url) => {
   const [data, setData] = useState(null);
+  const [ config, setConfig ] = useState(null)
   const [method, setMethod] = useState(null);
   const [callFetch, setCallFetch] = useState(false);
 
   const httpConfig = (data, method) => {
-    
+    if (method === "POST") {
+      setConfig({
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      setMethod(method);
+    }
   }
 
   useEffect(() => {
@@ -33,8 +44,7 @@ export const useFetch = (url) => {
       }
     };
     httpRequest()
-  }, [config]);
+  }, [config, method, url]);
 
-
-  return { data };
+  return { data, httpConfig };
 };

@@ -1,21 +1,40 @@
 import { useState, useEffect } from "react";
 
 export const useFetch = (url) => {
-    const [ data, setData ] = useState(null);
+  const [data, setData] = useState(null);
+  const [method, setMethod] = useState(null);
+  const [callFetch, setCallFetch] = useState(false);
 
-    useEffect(() => {
+  const httpConfig = (data, method) => {
+    
+  }
 
-        const fetchData = async () => {
-            const res = await fetch(url);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(url);
 
-            const data = await res.json();
+      const data = await res.json();
 
-            setData(data);
+      setData(data);
+    };
 
-        }
+    fetchData();
+  }, [url, callFetch]);
 
-        fetchData()
-    }, [url])
+  useEffect(() => {
+    const httpRequest = async () => {
+      if (method === "POST") {
+        let fetchOptions = [url, config];
 
-    return { data }
-}
+        const res = await fetch(...fetchOptions);
+        const data = await res.json();
+
+        setCallFetch(data);
+      }
+    };
+    httpRequest()
+  }, [config]);
+
+
+  return { data };
+};

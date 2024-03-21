@@ -127,6 +127,49 @@
     ? {items && items.map((item))} e segue o map normal
 
 * 17 Refatorando o post 
+    // criamos o useState config para configuração do POST
+    // Esse state vai configurar o metodo que sera utilizado, cabeçarios
+    ? const [ config, setConfig ] = useState(null)
 
+    // criamos o state method para receber o metodo que sera utilizado 
+    // que recebera da função o metodo post ou get
+    ? const [ method, setMethod] = useState(null) 
+    
+    // criamos o callFetch para mapear os dados que serao chamado
+    ? const [ callFetch, setCallFetch ] = useState(false);
+    // ele sera monitoriado pelo useEffect, e sempre sera chamado para atualizadar os dados
+    ? ? }, [url, callFetch])
+* 18 Configurando o post
+    // criamos um outro useEffect com a verificação do post
+    ? useEffect(() => {
+
+        // cria uma async function para envolver o if
+
+        ? const httpRequest = async () => {
+
+            ? if (method === "POST") {
+     
+             // Aqui criamos uma varivale let para criar um array com as configurações
+             // deixando dinamico
+             ? let fetchOptions = [ url, config];
+     
+             // aqui e feita a requisição
+             ? const res = await fetch(...fetchOptions);
+             ? const data = await res.json();
+     
+             // chamamos o callFetch 
+             ? setCallFetch(data)
+     
+            ? }
+        ? }
+        // chama a função
+        ? httpRequest()
+
+    ? }, [config])
+
+* 19 criando variavel de configuração
+ ? const httpConfig = (data, method) => {
+    
+ } 
 
 */

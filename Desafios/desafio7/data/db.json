@@ -1,0 +1,20 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "violao"
+    },
+    {
+      "id": 2,
+      "nome": "guitarra"
+    },
+    {
+      "id": "df3b",
+      "nome": "asdf"
+    },
+    {
+      "id": "93e6",
+      "nome": "qwer"
+    }
+  ]
+}

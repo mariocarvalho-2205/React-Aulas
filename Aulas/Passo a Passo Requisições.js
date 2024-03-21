@@ -52,7 +52,7 @@
         ? Criar função para adicionar os itens no objeto no form
         ? nos inputs adicionar o value com o valor do state
         ? Criar o evento de submit no formulário
-        ? Criar o evento onChamge para cada input do form
+        ? Criar o evento onChange para cada input do form
             ? onChamge={(e) => {
             ? setNome_do_objeto(e.target.value)
             ? }}

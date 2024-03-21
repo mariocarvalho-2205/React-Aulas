@@ -93,27 +93,33 @@
     // Importamos o useState e o useEffect do react
         ? import { useState, useEffect } from "react";
     // Criamos uma função para fazer a requisição custom hook
-    ? export default function useFetch(url) {
+    ? export const useFetch = (url) => {
         // aqui criamos uma constante para receber os dados da requisição
             ? const [data, setData] = useState(null) // o null é setado por nao saber se e string ou array
             ? const [loading, setLoading] = useState(false)
-        // Criação da requisição com useEffect 
+        // Criação da requisição async com useEffect 
         ? useEffect(() => {
-            ? const fetchData = async () => {
-                ? const res = await fetch(url)
 
-                ? const data = await res.json()
+                // requisição asyncrona
+                ? const fetchData = async () => {
+                    ? const res = await fetch(url)
 
-                ? setData(data)
-            ? }
+                    ? const data = await res.json()
+
+                    ? setData(data)
+                ? }
+
+                ? fetchData()
+            
+            ? }, [url])
         // exportando os dados para serem usados no componente
         ? return { data }
-
-        ? }, [url])
+        ? };
 * 15 Depois excluimos o useEffect do componente e importamos o useFetch
 * 16 importa o useFetch no component
     ? import useFetch from "../../hooks/useFetch";
-    // depois de importar o useFetch, podemos usar o hook dentro do componente
+    // depois de importar o hook useFetch, importaremos o que iremos usar do hook dentro do componente
+    // dessa forma teremos acesso aos dados do hook dentro do componente
     ? const { data: items } = useFetch("http://localhost:3000/nome_do_objeto"); / pode ser usado a variavel url
     ! o items renomeia os dados que estao chegando no hook para serem utilizados
     ? console.log(data); / para verificar se os dados estao chegando
@@ -121,4 +127,6 @@
     ? {items && items.map((item))} e segue o map normal
 
 * 17 Refatorando o post 
+
+
 */

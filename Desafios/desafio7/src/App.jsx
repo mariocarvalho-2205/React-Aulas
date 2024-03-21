@@ -1,6 +1,6 @@
 
 import './App.css'
-import Home from './components/index.jsx'
+import Home from '../src/components/index'
 
 function App() {
 

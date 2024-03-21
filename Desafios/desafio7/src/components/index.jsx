@@ -1,26 +1,15 @@
 import { useState, useEffect } from "react"
-// import { useFetch } from "../../src/hooks/useFetch.js"
+import { useFetch } from "../hooks/useFetch"
 
 const url = "http://localhost:3000/produtos"
 
 const Home = () => {
 
     const [ produto, setProduto ] = useState(null)
+
+    const { data: items } = useFetch(url)
+
     const [ nome, setNome ] = useState("")
-
-    // const { data: items } = useFetch(url)
-
-    useEffect(() => {
-        async function fetchData () {
-            const res = await fetch(url);
-            const data = await res.json()
-
-            setProduto(data)
-            console.log(data)
-        }
-        fetchData()
-    }, [])
-
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -58,7 +47,7 @@ const Home = () => {
         </form>
 
         <ul>
-            {produto && produto.map((item) => (
+            {items && items.map((item) => (
                 <li key={item.id}>{item.nome}</li>
             ))}
         </ul>

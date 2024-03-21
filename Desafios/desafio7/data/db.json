@@ -1,11 +1,11 @@
 {
   "produtos": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "violao"
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "guitarra"
     },
     {
@@ -15,6 +15,14 @@
     {
       "id": "93e6",
       "nome": "qwer"
+    },
+    {
+      "id": "b0ba",
+      "nome": "bateria"
+    },
+    {
+      "id": "5219",
+      "nome": ""
     }
   ]
 }

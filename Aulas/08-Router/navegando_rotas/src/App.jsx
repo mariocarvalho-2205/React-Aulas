@@ -4,6 +4,7 @@ import Home from "../src/pages/Home";
 import Produto from "../src/pages/Produto";
 import Produtos from "../src/pages/Produtos";
 import About from "../src/pages/About";
+import Info from "../src/pages/Info";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
 					<Route path="/produtos" element={<Produtos />} />
 					{/* Rota Dinamica */}
 					<Route path="/produtos/:id" element={<Produto />} />
+					{/* Nested Route */}
+					<Route path="/produtos/:id/info" element={<Info />} />
 				</Routes>
 			</BrowserRouter>
 		</>

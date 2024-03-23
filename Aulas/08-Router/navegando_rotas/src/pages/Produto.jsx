@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
+import { Link } from "react-router-dom";
 
 const Produto = () => {
 	const { id } = useParams();
@@ -11,8 +12,20 @@ const Produto = () => {
 	return (
 		<>
 			<p>Id do Produto {id}</p>
+      {error && <p>{error}</p>}
 			{loading && <h3>Carregando...</h3>}
-			{!error ? <p>{item && item.nome}</p> : <p>{error}</p>}
+      {item && (
+        <div>
+          <p>{item.nome}</p>
+          <Link to={`/produtos/${item.id}/info`}>Mais Informações</Link>
+        </div>
+      )}
+			{/* {!error ? (
+        <div>
+          <p>{item && item.nome}</p>
+          <Link to={`/produtos/${item.id}/info`}>Detalhes</Link>
+        </div>
+      ) : (<p>{error}</p>)} */}
 		</>
 	);
 };

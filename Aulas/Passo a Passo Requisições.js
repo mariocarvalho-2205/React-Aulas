@@ -187,4 +187,44 @@
  // na aplicação, inporta junto com o useFetch o httpConfig
  ? const { data: items, httpConfig } = useFetch(url)
 
+ * 20 estado de loading
+ // adicionamos no hook o estado de loading
+ ? const [loading, setLoading] = useState(false)
+ // definirmos onde colocar o loanding, ou seja, onde começa e onde termina
+ // sera colocado dentro do fetchData 
+ // logo no inicio da função fetchData
+ ? setLoading(true)
+ // e logo apos o setLoading(true) encerramos ele com o setLoading(false) no final da função
+ ? setLoading(false)
+ // ficando assim
+ ? const fetchData = async () => {
+    ? setLoading(true)
+
+    ? const res = await fetch(url)
+    ? const data = await res.json()
+    ? setData(data)
+
+    ? setLoading(false)
+? }
+// apos isso, exportamos o loading para ser usado no componente
+? return { data, httpConfig, loading }
+// importamos ele agora no componente
+? const { data: items, httpConfig, loading } = useFetch(url)
+// e fazemos uma verificação para exibição dele
+? {loading && <p>Carregando...</p>}
+// para simular isso vamos na aba network do devtools e simular uma requisição 
+// e dimiuimos a velocidade de carregamento da pagina
+// poedmos mudar a exibição da lista com a negação do loading
+// exemplo
+? {!loading && <ul>{items && items.map((item) => (<li key={item.id}>{item.nome}</li>))}</ul>}
+// alternativa
+? {loading? (<p>Carregando...</p>) : (<ul>{items && items.map((item))}</ul>)}
+
+* 21 estado de loading no POST
+// para isso removemos o botao quando o estado de loading estiver ativo
+? {loadin && <button type="submit">Salvar</button>}
+// podemos duplicar o input e quando o loaddin estiver true comocamos o disable
+// para ficar mais agradavel
+? {!loading && <button type="submit" disable>Salvar</button>}
+
 */

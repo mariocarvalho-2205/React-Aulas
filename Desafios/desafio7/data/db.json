@@ -1,84 +1,36 @@
 {
   "produtos": [
     {
-      "id": "1",
-      "nome": "violao"
+      "id": "7014",
+      "nome": "Bongo"
     },
     {
-      "id": "2",
+      "id": "6a5d",
       "nome": "guitarra"
     },
     {
-      "id": "df3b",
-      "nome": "asdf"
-    },
-    {
-      "id": "93e6",
-      "nome": "qwer"
-    },
-    {
-      "id": "b0ba",
+      "id": "92a6",
       "nome": "bateria"
     },
     {
-      "id": "5219",
+      "id": "af69",
+      "nome": "bateria"
+    },
+    {
+      "id": "e186",
+      "nome": "teclado"
+    },
+    {
+      "id": "aa97",
+      "nome": "teclado"
+    },
+    {
+      "id": "44ee",
       "nome": ""
     },
     {
-      "id": "a19a",
-      "nome": ""
-    },
-    {
-      "id": "bd43",
-      "nome": ""
-    },
-    {
-      "id": "d676",
-      "nome": ""
-    },
-    {
-      "id": "146b",
-      "nome": ""
-    },
-    {
-      "id": "5902",
-      "nome": ""
-    },
-    {
-      "id": "2a82",
+      "id": "6ba9",
       "nome": "bass"
-    },
-    {
-      "id": "b4be",
-      "nome": ""
-    },
-    {
-      "id": "7e5d",
-      "nome": ""
-    },
-    {
-      "id": "fdcf",
-      "nome": ""
-    },
-    {
-      "id": "783c",
-      "nome": "pp"
-    },
-    {
-      "id": "b3ea",
-      "nome": "tec"
-    },
-    {
-      "id": "0682",
-      "nome": ""
-    },
-    {
-      "id": "eee7",
-      "nome": "bateraaaa"
-    },
-    {
-      "id": "f081",
-      "nome": "percussao"
     }
   ]
 }

@@ -1,24 +1,12 @@
 {
   "produtos": [
     {
-      "id": "7014",
-      "nome": "Bongo"
-    },
-    {
       "id": "6a5d",
       "nome": "guitarra"
     },
     {
       "id": "92a6",
       "nome": "bateria"
-    },
-    {
-      "id": "af69",
-      "nome": "bateria"
-    },
-    {
-      "id": "e186",
-      "nome": "teclado"
     },
     {
       "id": "aa97",
@@ -31,6 +19,10 @@
     {
       "id": "6ba9",
       "nome": "bass"
+    },
+    {
+      "id": "9f94",
+      "nome": "percussao"
     }
   ]
 }

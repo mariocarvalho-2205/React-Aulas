@@ -1,53 +1,75 @@
 import { useState, useEffect } from "react";
 
 export const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [ config, setConfig ] = useState(null)
-  const [method, setMethod] = useState(null);
-  const [callFetch, setCallFetch] = useState(false);
-  const [loading, setLoading ] = useState(false)
+	const [data, setData] = useState(null);
+	const [config, setConfig] = useState(null);
+	const [method, setMethod] = useState(null);
+	const [callFetch, setCallFetch] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
+  const [ id, setId ] = useState(null)
 
-  const httpConfig = (data, method) => {
-    if (method === "POST") {
+	const httpConfig = (data, method) => {
+		if (method === "POST") {
+			setConfig({
+				method: method,
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(data),
+			});
+
+			setMethod(method);
+		} else if (method === "DELETE") {
       setConfig({
         method: method,
-        headers: {
+				headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
+				}
+			});
       setMethod(method);
+      setId(data)
     }
-  }
+	};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const res = await fetch(url);
+	useEffect(() => {
+		const fetchData = async () => {
+			setLoading(true);
 
-      const data = await res.json();
+			try {
+				const res = await fetch(url);
 
-      setData(data);
-      setLoading(false);
-    };
+				const data = await res.json();
 
-    fetchData();
-  }, [url, callFetch]);
+				setData(data);
+			} catch (error) {
+				console.log(error.message);
+				setError("Houve um erro na requisição");
+			}
+			setLoading(false);
+		};
 
-  useEffect(() => {
-    const httpRequest = async () => {
+		fetchData();
+	}, [url, callFetch]);
+
+	useEffect(() => {
+    let data
+		const httpRequest = async () => {
+      let fetchOptions = [url, config];
       if (method === "POST") {
-        let fetchOptions = [url, config];
 
-        const res = await fetch(...fetchOptions);
-        const data = await res.json();
+				const res = await fetch(...fetchOptions);
+				data = await res.json();
 
-        setCallFetch(data);
+			} else if (method === "DELETE") {
+        const deleteUrl = `${url}/${id}`
+        const res = await fetch(deleteUrl, config)
+        data = await res.json()
       }
-    };
-    httpRequest()
-  }, [config, method, url]);
+      setCallFetch(data);
+		};
+		httpRequest();
+	}, [config, method, url]);
 
-  return { data, httpConfig, loading };
+	return { data, httpConfig, loading, error };
 };

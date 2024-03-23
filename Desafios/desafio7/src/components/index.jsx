@@ -6,7 +6,7 @@ const url = "http://localhost:3000/produtos";
 const Home = () => {
 	const [produto, setProduto] = useState(null);
 
-	const { data: items, httpConfig, loading } = useFetch(url);
+	const { data: items, httpConfig, loading, error } = useFetch(url);
 
 	const [nome, setNome] = useState("");
 
@@ -17,27 +17,19 @@ const Home = () => {
 			nome,
 		};
 
-		// const res = await fetch(url, {
-		//     method: "POST",
-		//     headers: {
-		//         "Content-Type": "application/json"
-		//     },
-		//     body: JSON.stringify(produtos)
-		// })
-
-		// const addedProduto = await res.json()
-		// setProduto(produtos => [...produtos, addedProduto])
-
 		httpConfig(produtos, "POST");
-		console.log("chegou");
-		console.log(produtos);
 		setNome("");
+	};
+
+	const handleDelete = async (id) => {
+		httpConfig(id, "DELETE");
 	};
 
 	return (
 		<div>
 			<h1>Home</h1>
-            
+			{error && <p>{error}</p>}
+
 			<form onSubmit={handleSubmit}>
 				<label>
 					Nome:
@@ -47,17 +39,22 @@ const Home = () => {
 						onChange={(e) => setNome(e.target.value)}
 					/>
 				</label>
-                {loading && <input type="submit" value="Aguarde" disabled/>}
-                {!loading && 
-                <input type="submit" value="Salvar"/>}
-				
+				{loading && <input type="submit" value="Aguarde" disabled />}
+				{!loading && <input type="submit" value="Salvar" />}
 			</form>
-			{loading ? (
-				<p>Carregando....</p>
-			) : (
+
+			{loading && <p>Carregando....</p>}
+			{!error && (
 				<ul>
 					{items &&
-						items.map((item) => <li key={item.id}>{item.nome}</li>)}
+						items.map((item) => (
+							<li key={item.id}>
+								{item.nome} -
+								<button onClick={() => handleDelete(item.id)}>
+									Excluir
+								</button>
+							</li>
+						))}
 				</ul>
 			)}
 		</div>

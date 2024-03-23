@@ -227,4 +227,108 @@
 // para ficar mais agradavel
 ? {!loading && <button type="submit" disable>Salvar</button>}
 
+* 22 tratando erros por meio do try catch 
+// criamos o state de erro no hook useFetch
+? const [error, setError] = useState(null)
+// dentro do fetchData incluimos o try catch e colocamos o fetch dentro dele
+// vai ficar assim
+? const fetchData = async () => {
+    ? setLoading(true)
+
+    ? try {
+        ? const res = await fetch(url)
+        ? const data = await res.json()
+        ? setData(data)
+
+    ? } catch (error) {
+        ? console.log(error.message)  // ira verificar se podemos exibir o tipo de mensagem de erro
+        ? setError("Houve um erro ao carregar os dados!")
+    ? }
+    
+    ? setLoading(false)
+? }
+// em seguida exportamos o erro no return do hook
+? return { data, httpConfig, loading, error }
+// depois importamos ele no componente no desctruring
+? const { data: items, httpConfig, loading, error } = useFetch(url)
+// no compoente podemos exibir o erro se ele existir
+? {error && <p>{error}</p>}
+// por nao termos erro na aplicação, provocamos o erro na url
+? const url = "http://localhost:3001/nome_do_objeto"
+// podemos mudar a exibição da lista para se houver erro ela nao exibir
+? {!error && <li></li>}
+
+
+* 23 inserindo o delete no hook
+// criamos o state para receber o id do item que sera deletado
+? const [id, setId] = useState(null)
+// criamos na configuração dos metodos um else if com o metodo DELETE
+// vai ficar assim
+? const httpConfig = (data, method) => {
+    // configurando o method
+    ? if (method === "POST") {
+        ? setConfig({
+            ? method,
+            ? headers: {
+                ? "Content-Type": "application/json",
+            ? },
+            ? body: JSON.stringify(data),
+        ? })
+        ? setMethod(method)
+    ? } else if (method === "DELETE") {
+        ? setConfig({
+            ? method,
+            ? headers: {
+                ? "Content-Type": "application/json",
+            ? }
+        ? })
+        ? setMethod(method)
+        ? setid(data)
+    }
+ ?}
+// agora criamos um else if na resuisição com o moteodo DELETE
+// vai ficar assim
+! a variavel data vai precisar ser iniciada antes do if
+? const httpRequest = async () => {
+
+    // variaval data inicada fora do if
+    ?let data,
+
+        ? if (method === "POST") {
+    
+            // Aqui criamos uma varivale let para criar um array com as configurações
+            // deixando dinamico
+            ? let fetchOptions = [ url, config];
+    
+            // aqui e feita a requisição
+            ? const res = await fetch(...fetchOptions);
+            ? data = await res.json();
+    
+            
+            
+        ? } else if (method === "DELETE") {
+            // criamos a variavel para remoção dinamica
+            ? const deleteUrl = `${url}/${id}`
+            // criamos o fetch com a url dinamica
+            ? const res = await fetch(deleteUrl, config)
+            ? data = res.json()
+
+
+        ? }
+
+        // colocamos o setCallFetch fora do if para que ele seja chamado sempre
+        // chamado 
+        // chamamos o callFetch 
+            ? setCallFetch(data)
+* 24 ajustando o fronta para deletar o item da lista
+// inserindo o botao para excluir
+? <button onClick={() => handleRemove(produtos.id)}>Excluir</button>
+// criamos a função para remover
+? const handleRemove = (id) => {
+    // chamamos o httpconfig com o id e com o verbo
+    ? httpConfig(id, "DELETE")
+? }
+            
+
+
 */

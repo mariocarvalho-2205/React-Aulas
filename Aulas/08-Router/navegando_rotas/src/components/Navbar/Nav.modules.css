@@ -1,0 +1,19 @@
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+a {
+    color: rgb(90, 14, 230);
+}
+
+a:hover {
+    color: rgb(151, 87, 253);
+}
+
+.active {
+    background-color: #000;
+    color: bisque;
+}

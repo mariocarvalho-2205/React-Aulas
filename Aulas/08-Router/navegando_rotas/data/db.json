@@ -3,6 +3,10 @@
         {
             "id": 1,
             "nome": "Mouse"
+        },
+        {
+            "id": 2,
+            "nome": "Teclado"
         }
     ]
 }

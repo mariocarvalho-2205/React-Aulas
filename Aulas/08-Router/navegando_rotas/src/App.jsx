@@ -5,6 +5,7 @@ import Produto from "../src/pages/Produto";
 import Produtos from "../src/pages/Produtos";
 import About from "../src/pages/About";
 import Info from "../src/pages/Info";
+import NotFound from "./pages/NotFound";
 import "./App.css";
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
 					<Route path="/produtos/:id" element={<Produto />} />
 					{/* Nested Route */}
 					<Route path="/produtos/:id/info" element={<Info />} />
+					{/* Pagina 404 */}
+					<Route path="*" element={<NotFound/> }/>
 				</Routes>
 			</BrowserRouter>
 		</>

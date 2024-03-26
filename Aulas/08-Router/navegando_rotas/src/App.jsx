@@ -7,8 +7,6 @@ import About from "../src/pages/About";
 import Info from "../src/pages/Info";
 import NotFound from "./pages/NotFound";
 import "./App.css";
-import SearchForm from "./components/SearchForm/SearchForm";
-import Search from "./pages/Search";
 
 function App() {
 	return (
@@ -17,7 +15,6 @@ function App() {
       {/*links com as rotas precisa estar dentro do Browser Router*/}
 			<BrowserRouter>
 				<Nav /> 
-				<SearchForm />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/about" element={<About />} />

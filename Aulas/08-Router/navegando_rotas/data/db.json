@@ -2,12 +2,12 @@
     "produtos": [
         {
             "id": 1,
-            "nome": "Mouse",
+            "nome": "mouse",
             "informacao": "Mouse sem fio"
         },
         {
             "id": 2,
-            "nome": "Teclado",
+            "nome": "teclado",
             "informacao": "Teclado sem fio"
         }
     ]

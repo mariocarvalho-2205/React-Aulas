@@ -43,7 +43,6 @@ export const useFetch = (url) => {
 
 				setData(data);
 			} catch (error) {
-				console.log(error.message);
 				setError("Houve um erro na requisição");
 			}
 			setLoading(false);

@@ -1,23 +1,25 @@
 import { useSearchParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 
-const Search = () => {
+const Search = (props) => {
   const [searchParams] = useSearchParams();
+  const nome = searchParams.get("produtos")
 
-  const url = `http://localhost:3000/produtos?${searchParams}`;
+  const url = `http://localhost:3000/produtos?${nome}`;
 
-  const { data: items, loading, error } = useFetch(url);
-
+  const { data: item, loading, error } = useFetch(url);
+  
+    // console.log(item.nome)
   
 
 
   return ( 
   <div>
     
-    <h2>Resultado da Busca</h2>
+    <h2>Resultado da Busca {nome}</h2>
+
     <ul>
-        {items && items.map((item) => (
-            
+        {item && item.map((item) => (
           <li key={item.id}>
             <p>{item.nome}</p>
             <a href={`/produtos/${item.id}`}>Detalhes</a>

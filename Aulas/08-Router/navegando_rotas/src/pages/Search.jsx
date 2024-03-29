@@ -3,13 +3,13 @@ import { useFetch } from "../hooks/useFetch";
 
 const Search = (props) => {
   const [searchParams] = useSearchParams();
-  const nome = searchParams.get("produtos")
+  const nome = searchParams.get("nome")
 
   const url = `http://localhost:3000/produtos?${nome}`;
 
   const { data: item, loading, error } = useFetch(url);
   
-    // console.log(item.nome)
+  console.log(nome + " search")
   
 
 

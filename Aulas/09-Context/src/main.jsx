@@ -1,11 +1,11 @@
-import React from "react"
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import App from './App.jsx'
-import Home from '../src/pages/Home.jsx'
-import About from '../src/pages/About.jsx'
-import './index.css'
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App.jsx";
+import Home from "../src/pages/Home.jsx";
+import About from "../src/pages/About.jsx";
+import { CounterContextProvider } from "./context/CounterContext.jsx";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -14,18 +14,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "/about",
-        element: <About />
+        element: <About />,
       },
-    ]
-  }
-])
+    ],
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
-  </React.StrictMode>,
-)
+    <CounterContextProvider>
+      <RouterProvider router={router} />
+    </CounterContextProvider>
+  </React.StrictMode>
+);

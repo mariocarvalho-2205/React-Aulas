@@ -27,6 +27,43 @@
 ? 5 - exporta o banco de dados do arquivo 
     export { db }
 
+? 6 - instalar o react router dom
+? 7 - Importar e Configurar as rotas no arquivo principal
+    import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+    // configurando as rotas
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <App/>,
+            children: [
+            {
+                path: "/",
+                element: <Home />
+            }
+            ]
+        }
+    ])
+
+    // chamando o router provider
+    ReactDOM.createRoot(document.getElementById('root')).render(
+        <React.StrictMode>
+            <RouterProvider router={router} />
+        </React.StrictMode>,
+    )
+
+? 8 - importar o Outlet no arquivo app e chamar no return 
+import { Outlet } from "react-router-dom"
+
+return (
+    <>
+        <Outlet />    
+    </>
+)
+
+? 9 - Criar componente Nav e Footer e inserir no app
+
+
 
 
 

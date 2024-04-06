@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import Home from "../src/pages/Home.jsx";
 import About from "../src/pages/About.jsx";
 import { CounterContextProvider } from "./context/CounterContext.jsx";
+import { TilteColorContextProvider } from "./context/TitleColorContext.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -27,7 +28,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CounterContextProvider>
-      <RouterProvider router={router} />
+      <TilteColorContextProvider>
+        <RouterProvider router={router} />
+      </TilteColorContextProvider>
     </CounterContextProvider>
   </React.StrictMode>
 );

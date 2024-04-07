@@ -66,6 +66,10 @@ return (
 ? 11 - criar as rotas para as paginas no arquivo main.jsx
 ? 12 - criar o form no componente
 ? 13 - o css do form e criado de forma global e somente estilização minima vai no css do componente
+? 14 - criar os states no form para pegar os dados dos inputs 
+? 15 - criar a função handleSubmit 
+? 16 - Colocar no form o onSumbmit{handleSubmit} e nos inputs o onChange{(e) => set(e.target.value)} colocar o value com as variaveis value={}
+? 17 - criar objeto dentro da função para pedar os dados do form e setar o error dentro da função
 
 
 

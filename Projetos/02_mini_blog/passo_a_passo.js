@@ -64,6 +64,9 @@ return (
 ? 9 - Criar componente Nav e Footer e inserir no app
 ? 10 - criar pagina para login e para register
 ? 11 - criar as rotas para as paginas no arquivo main.jsx
+? 12 - criar o form no componente
+? 13 - o css do form e criado de forma global e somente estilização minima vai no css do componente
+
 
 
 

@@ -67,11 +67,88 @@ return (
 ? 12 - criar o form no componente
 ? 13 - o css do form e criado de forma global e somente estilização minima vai no css do componente
 ? 14 - criar os states no form para pegar os dados dos inputs 
-? 15 - criar a função handleSubmit 
+? 15 - criar a função asincrona handleSubmit 
 ? 16 - Colocar no form o onSumbmit{handleSubmit} e nos inputs o onChange{(e) => set(e.target.value)} colocar o value com as variaveis value={}
 ? 17 - criar objeto dentro da função para pedar os dados do form e setar o error dentro da função
+? 18 - Criar o hook para autenticação
+    // importar os comando do firebase
+    * import {
+        getAuth,
+        createUserWithEmailAndPassqord,
+        signInWithEmailAndPassword,
+        updateProfile,
+        signOut
+    } from "firebase/auth"
+
+    // importar useState e UseEffect
+    // Criar a exportar a função de authentication
+    * esport const useAuthentication = () => {
+        // criar 2 estagios para verificação
+        const [ error, setError ] = useState(null)
+        const [ loading, setLoading ] = useState(null)
+
+        // criar uma instrução chamada cleanup para nao deixar rescisios de funções
+        // e poupar memoria
+        const [ cancelled, setCancelled ] = useState(false)
+
+        // pegar autenticação que vem do firebase
+        const auth = getAuth()
+
+        // criar uma função para checagem e authenticação e evitar vazamento de memoria
+        function checkIfIsCancelled () {
+            if (cancelled) {
+                return 
+            }
+        }
+
+        // criar usuario
+        const createUser = async (data) => {
+            checkIfIsCancelled()
+
+            setLoading(true)
+            // checar error
+            try {
+                // pegar usuarios que chega da função
+                // chama a função do firebase
+                const {user} = await createUserWithEmailAndPassword(
+                    auth,
+                    data.email,
+                    data.password
+                )
+                // atualizar usuario
+                await updateProfile(user, {
+                    displayName: data:displayName
+                })
 
 
+            } catch (error) {
+                console.log(error)
+                console.lod(typeof error.message)
+                
+                // tratando erro
+
+                let systemErrorMessage
+                if (error.message.includer('Password')) {
+                    systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres"
+                } else if (error.message.includes("email-already")) {
+                    systemErrorMessage = "E-mail ja cadastrado"
+                }
+            }
+
+            setLoagind(false)
+        }
+        // colocar o cancelled como true assim que sair dessa pagina
+        useEffect(() => {
+            return () => setCancelled(true)
+        }, [])
+
+        // retornando os dados que veio da api
+        return { auth, createUser, error, loading}
+        * }
+        ! não esquecer de importar o db no hook
+? 19 - importar o hook no app
+import { useAuthentication } from "../hooks/useAuthentication"
+* const { createUser, error: authError, loading } = useAuthentication
 
 
 

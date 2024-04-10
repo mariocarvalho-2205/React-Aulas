@@ -37,7 +37,7 @@ export const useAuthentication = () => {
 
         try {
             // criar usuario
-            const { data2 } = await createUserWithEmailAndPassword(
+            const { data } = await createUserWithEmailAndPassword(
                 auth,
                 data.name,
                 data.email

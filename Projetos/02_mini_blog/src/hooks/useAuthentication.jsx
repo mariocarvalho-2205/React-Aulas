@@ -37,10 +37,10 @@ export const useAuthentication = () => {
 
         try {
             // criar usuario
-            const { data } = await createUserWithEmailAndPassword(
+            const { user } = await createUserWithEmailAndPassword(
                 auth,
-                data.name,
-                data.email
+                data.email,
+                data.password
             )
 
             // valida usuario

@@ -149,6 +149,77 @@ return (
 ? 19 - importar o hook no app
 import { useAuthentication } from "../hooks/useAuthentication"
 * const { createUser, error: authError, loading } = useAuthentication
+? 20 - Criar o contexto para fazer a diferenciação de usuario
+// criar pasta chamada context e dentro dela o arquivo AuthContext.jsx
+// importar o useContext e o createContext
+// criar o contexto
+* const AuthContext =createContext()
+// criar o provider e exportar a função
+* export function AuthProvider ({ children, value }) {
+* return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+* }
+
+// criar hook para pegar o contexto
+* export function useAuthValue() {
+*     return useContext(AuthContext)
+* }
+
+? 21 - Inserir o context no app englobando tudo
+* import { AuthProvider } from "../context/AuthContext"
+? 22 - importar o onAuthStateChanged para mapear o login do usuario
+* import { onAuthStateChanged } from "firebase/auth"
+? 24 - importar tambem o useState e o useEffect junto com o authtentication
+* import { useState, useEffect } from "react";
+* import { useAuthentication } from "../hooks/useAuthentication";
+// criar a função para verificar se o usuario está logado
+// cria o user e recebe a autencicação do firebase
+  const [ user, setUser ] = useState(undefined)
+  const { auth } = useAuthentication()
+
+  const loadingUser = user === undefined
+
+  // verifica se esta autenticado
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user)
+    })
+  }, [ auth ])
+
+  // verifica se esta carregando o usuario
+  if (loadingUser) {
+    return <p>Carregando</p>
+  }
+? 25 - verifica se o usuario esta logado no AuthProvider no app
+* <AuthProvider value={{ user }}>
+? no navbar recebe o authenticatio e o useAuthValue para verificar se o usuario esta logado e muda o navbar
+* import { useAuthValue } from "../hooks/useAuthentication"
+* import { useAuththenticatio } from "../hooks/useAuthentication"
+// pega o usuario no navbar com o authvalue
+* const { user } = useAuthValue()
+// faz a validação na li, se estiver autenticado, exibi ou nao
+{!user && (
+    <>
+    <li>
+        <NavLink
+        to="/login"
+        className={({ isActive }) => (isActive ? styles.active : "")}
+        >
+        Entrar
+        </NavLink>
+    </li>
+    <li>
+        <NavLink
+        to="/register"
+        className={({ isActive }) => (isActive ? styles.active : "")}
+        >
+        Cadastrar
+        </NavLink>
+    </li>
+    </>
+)}
+
+? 26 - criar paginas de login e dashboard
+
 
 
 

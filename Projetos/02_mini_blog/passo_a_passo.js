@@ -219,6 +219,8 @@ import { useAuthentication } from "../hooks/useAuthentication"
 )}
 
 ? 26 - criar paginas de CreatePost e dashboard e criar as rotas no main
+// usar a mesma no navbar logica para o register e o 
+// login sendo que inversa para exibir o dashboard e o createpost
 
 
 

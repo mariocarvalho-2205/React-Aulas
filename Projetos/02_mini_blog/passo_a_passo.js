@@ -218,7 +218,7 @@ import { useAuthentication } from "../hooks/useAuthentication"
     </>
 )}
 
-? 26 - criar paginas de login e dashboard
+? 26 - criar paginas de CreatePost e dashboard e criar as rotas no main
 
 
 

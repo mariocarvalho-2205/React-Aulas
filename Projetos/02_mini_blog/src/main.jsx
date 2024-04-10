@@ -10,6 +10,8 @@ import Home from "./pages/Home/Home.jsx";
 import About from "./pages/About/About.jsx";
 import Log from "./pages/Login/Log.jsx";
 import Register from "./pages/Register/Register.jsx";
+import CreatePost from "./pages/CreatePost/CreatePost.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 
 
 
@@ -32,8 +34,16 @@ const router = createBrowserRouter([
         element: <Log />,
       },
       {
-        path: "register",
+        path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/posts/create",
+        element: <CreatePost />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate, BrowserRouter, Routes, Route } from "react-router-dom";
 // components
 import Navbar from "../src/components/Navbar/Navbar";
 import Footer from "../src/components/Footer/Footer";
@@ -12,6 +12,14 @@ import { onAuthStateChanged } from "firebase/auth";
 // import hooks
 import { useState, useEffect } from "react";
 import { useAuthentication } from "./hooks/useAuthentication";
+
+// pages
+import Home from "./pages/Home/Home.jsx";
+import About from "./pages/About/About.jsx";
+import Log from "./pages/Login/Log.jsx";
+import Register from "./pages/Register/Register.jsx";
+import CreatePost from "./pages/CreatePost/CreatePost.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 
 function App() {
 
@@ -33,15 +41,24 @@ function App() {
   }
 
   return (
-    <>
+    <BrowserRouter>
       <AuthProvider value={{ user }}>  {/* Aqui verifica se o usuario está logado  */}
         <Navbar />
         <div className="container">
-          <Outlet />
+          <Routes>
+            <Route path="/" element={<Home />}/>
+            <Route path="/about" element={<About />}/>
+            <Route path="/login" element={!user ? <Log /> : <Navigate to="/" />}/>
+            <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />}/>
+            <Route path="/posts/create" element={user ? <CreatePost /> : <Navigate to="/login" />}/>
+            <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />}/>
+          {/* <Outlet /> */}
+
+          </Routes>
         </div>
         <Footer />
       </AuthProvider>
-    </>
+    </BrowserRouter>
   );
 }
 

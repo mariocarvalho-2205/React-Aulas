@@ -6,9 +6,11 @@ import { useAtuhValue } from "../../context/AuthContext";
 
 // CSS
 import styles from "./Navbar.module.css";
+// import { isButtonElement } from "react-router-dom/dist/dom";
 
 const Navbar = () => {
   const { user } = useAtuhValue()
+  const { logout } = useAuthentication()
 
   return (
     <nav className={styles.navbar}>
@@ -73,6 +75,11 @@ const Navbar = () => {
             Sobre
           </NavLink>
         </li>
+        {user && (
+          <li>
+            <button onClick={logout}>Sair</button>
+          </li>
+        )}
       </ul>
     </nav>
   );

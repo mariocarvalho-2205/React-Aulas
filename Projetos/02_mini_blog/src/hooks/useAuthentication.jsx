@@ -65,9 +65,15 @@ export const useAuthentication = () => {
 
             setError(systemErrorMessage)
         }
-
+        
         setLoading(false)
 
+    }
+
+    // logout - sign out
+    const logout = async () => {
+        checkIfIsCancelled()
+        signOut(auth)
     }
 
     // colocar o cancelled como true assim que sair dessa pagina
@@ -80,7 +86,8 @@ export const useAuthentication = () => {
         auth,
         createUser,
         error,
-        loading
+        loading,
+        logout
     }
 
 

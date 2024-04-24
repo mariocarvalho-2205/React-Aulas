@@ -10,7 +10,7 @@ const Log = () => {
   const [error, setError] = useState("");
 
   // importando os dados do hook de autenticação
-  const { createUser, error: authError, loading } = useAuthentication();
+  const { login, error: authError, loading } = useAuthentication();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,9 +23,9 @@ const Log = () => {
     };
 
     // pegar a resposta
-    const res = await createUser(user);
+    const res = await login(user);
 
-    console.log(user);
+    console.log(res);
     setEmail("");
     setPassword("");
   };

@@ -50,8 +50,8 @@ export const useAuthentication = () => {
             })
         } catch (error) {
 
-            console.log(error)
-            console.log(typeof error.message)
+            // console.log(error)
+            // console.log(typeof error.message)
 
             // tratando mensagem de error
             let systemErrorMessage
@@ -81,7 +81,7 @@ export const useAuthentication = () => {
     const login = async (data) => {
         checkIfIsCancelled()
         setLoading(true)
-        setError(false)
+        setError(null)
 
         try {
             // login
@@ -92,10 +92,10 @@ export const useAuthentication = () => {
             )
             setLoading(false)
         } catch (error) {
-
-            let systemErrorMessage;
+            console.log(error.message)
             setError(true)
-            if (error.message.includes("user-not-found")) {
+            let systemErrorMessage;
+            if (error.message.includes("auth/invalid-credentials")) {
                 systemErrorMessage = "Usuário não encontrado"
             } else if (error.message.includes("wrong-password")) {
                 systemErrorMessage = "Senha incorreta"

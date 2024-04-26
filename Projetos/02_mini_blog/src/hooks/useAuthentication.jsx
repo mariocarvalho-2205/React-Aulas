@@ -7,7 +7,6 @@ import {
     updateProfile,
     signOut
 } from "firebase/auth"
-import { set } from "mongoose"
 
 import { useState, useEffect } from "react"
 
@@ -50,13 +49,13 @@ export const useAuthentication = () => {
             })
         } catch (error) {
 
-            // console.log(error)
+            console.log(error)
             // console.log(typeof error.message)
 
             // tratando mensagem de error
             let systemErrorMessage
 
-            if (error.message.includes("Password")) {
+            if (error.message.includes("password")) {
                 systemErrorMessage = "A senha precisa ter pelo menos 6 caracteres"
             } else if (error.message.includes("email-already")) {
                 systemErrorMessage = "e-mail já cadastrado"
@@ -97,8 +96,8 @@ export const useAuthentication = () => {
             let systemErrorMessage;
             if (error.message.includes("user-not-found")) {
                 systemErrorMessage = "Usuário não encontrado"
-            } else if (error.message.includes("wrong-password")) {
-                systemErrorMessage = "Senha incorreta"
+            } else if (error.message.includes("credential")) {
+                systemErrorMessage = "Usuário não encontrado! Verifique sua senha e seu email";
             } else {
                 systemErrorMessage = "Ocorreu erro, por favor tente mais tarde."
             }

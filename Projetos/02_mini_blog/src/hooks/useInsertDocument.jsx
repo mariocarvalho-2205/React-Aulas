@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const insertReducer = (state, action) => {
-    console.log(action)
+    
 
     switch(action.type) {
         case "LOADING":
@@ -24,17 +24,21 @@ const insertReducer = (state, action) => {
 
 export const useInsertDocument = (docCollection) => {
     const [ response, dispatch ] = useReducer(insertReducer, initialState)
+    console.log(response.loading)
+    
 
     // deal memory leak
     const [ cancelled, setCancelled ] = useState(false)
 
     const checkCancelBeforeDispatch = (action) => {
+        
         if (!cancelled) {
             dispatch(action)
         }
     }
 
     const insertDocument = async (document) => {
+        
 
         checkCancelBeforeDispatch({
             type: "LOADING"
@@ -59,6 +63,7 @@ export const useInsertDocument = (docCollection) => {
                 payload: error.message
             })
         }
+        
     }
 
     useEffect(() => {

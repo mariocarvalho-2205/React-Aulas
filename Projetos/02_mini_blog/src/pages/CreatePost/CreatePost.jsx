@@ -19,7 +19,7 @@ const CreatePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("chegou na função")
+  
     // zerar erros do form
     setFormError("")
 

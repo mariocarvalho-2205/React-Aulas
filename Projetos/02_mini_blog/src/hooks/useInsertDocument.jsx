@@ -8,7 +8,18 @@ const initialState = {
 }
 
 const insertReducer = (state, action) => {
+    console.log(action)
 
+    switch(action.type) {
+        case "LOADING":
+            return {loading: true, error: null}
+        case "INSERTED_DOC":
+            return {loading: false, error: null}
+        case "ERROR":
+            return {loading: false, error: action.payload}
+        default:
+            return state
+    }
 }
 
 export const useInsertDocument = (docCollection) => {
@@ -25,6 +36,10 @@ export const useInsertDocument = (docCollection) => {
 
     const insertDocument = async (document) => {
 
+        checkCancelBeforeDispatch({
+            type: "LOADING"
+        })
+
         try {
             const newDocument = {...document, createAt: Timestamp.now()}
 
@@ -34,12 +49,22 @@ export const useInsertDocument = (docCollection) => {
             )
 
             checkCancelBeforeDispatch({
-                type: "",
-                payload: insertDocument
+                type: "INSERTED_DOC",
+                payload: insertedDocument
             })
         } catch (error) {
 
+            checkCancelBeforeDispatch({
+                type: "ERROR",
+                payload: error.message
+            })
         }
     }
+
+    useEffect(() => {
+        return () => setCancelled(true)
+    }, [])
+
+    return { insertDocument, response}
 
 }

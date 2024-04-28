@@ -2,14 +2,14 @@ import { NavLink } from "react-router-dom";
 
 // import Authenticatio e authValue
 import { useAuthentication } from "../../hooks/useAuthentication";
-import { useAtuhValue } from "../../context/AuthContext";
+import { useAuthValue } from "../../context/AuthContext";
 
 // CSS
 import styles from "./Navbar.module.css";
 // import { isButtonElement } from "react-router-dom/dist/dom";
 
 const Navbar = () => {
-  const { user } = useAtuhValue()
+  const { user } = useAuthValue()
   const { logout } = useAuthentication()
 
   return (

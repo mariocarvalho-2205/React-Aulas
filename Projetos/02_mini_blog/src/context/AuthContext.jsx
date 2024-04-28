@@ -9,6 +9,6 @@ export function AuthProvider({ children, value }) {
 }
 
 // criar hook para pegar o contexto
-export function useAtuhValue() {
+export function useAuthValue() {
     return useContext(AuthContext)
 }

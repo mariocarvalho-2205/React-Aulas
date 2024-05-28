@@ -96,6 +96,7 @@ const CreatePost = () => {
         
         {response.error && <p className="error">{response.error}</p>}
       </form>
+      <p></p>
     </div>
   );
 };

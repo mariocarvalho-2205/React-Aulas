@@ -17,6 +17,8 @@ const CreatePost = () => {
   // importando o hook
   const { insertDocument, response } = useInsertDocument("posts")
 
+  const navigate = useNavigate()
+
   const handleSubmit = (e) => {
     e.preventDefault();
   
@@ -24,22 +26,35 @@ const CreatePost = () => {
     setFormError("")
 
     // validar image URL
-
+    try {
+      new URL(image);
+    } catch (error) {
+      setFormError("A imagem precisa ser uma URL válida.")
+    }
     // criar o array de tags
+    const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
     // checar todos os valores
+    if (!title ||!image || !tags ||!body) {
+      setFormError("Todos os campos são obrigatórios.")
+    }
+
+    if (formError) {
+      return;
+    }
 
     insertDocument({
       title,
       image,
       body,
-      tags,
+      tagsArray,
       uid: user.uid,
       createdBy: user.displayName
 
     })
 
     // redirect to home page
+    navigate("/")
 
   };
 
@@ -91,10 +106,15 @@ const CreatePost = () => {
             value={tags}
           />
         </label>
-        {!response.loading && <button className="btn" >Criar Post</button>}
-        {response.loading && <button className="btn" disabled>Aguarde...</button>}
-        
+        {!response.loading && <button className="btn">Criar Post</button>}
+        {response.loading && (
+          <button className="btn" disabled>
+            Aguarde...
+          </button>
+        )}
+
         {response.error && <p className="error">{response.error}</p>}
+        {formError && <p className="error">{formError}</p>}
       </form>
       <p></p>
     </div>

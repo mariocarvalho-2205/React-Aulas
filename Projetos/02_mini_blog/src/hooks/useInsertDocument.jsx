@@ -35,6 +35,7 @@ export const useInsertDocument = (docCollection) => {
 
   const insertDocument = async (document) => {
     checkCancelBeforeDispatch({ type: "LOADING" });
+    console.log("Loading State:", true); // Adicione este log
 
     try {
       const newDocument = { ...document, createdAt: Timestamp.now() };
@@ -48,8 +49,10 @@ export const useInsertDocument = (docCollection) => {
         type: "INSERTED_DOC",
         payload: insertedDocument,
       });
+      console.log("Loading State:", false); // Adicione este log
     } catch (error) {
       checkCancelBeforeDispatch({ type: "ERROR", payload: error.message });
+      console.log("Error State:", error.message); // Adicione este log
     }
   };
 

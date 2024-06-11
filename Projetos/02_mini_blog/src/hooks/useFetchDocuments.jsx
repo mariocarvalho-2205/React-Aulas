@@ -18,40 +18,48 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
   const [cancelled, setCancelled] = useState(false);
 
   useEffect(() => {
-
     async function loadData() {
-        if (cancelled) return;
+      if (cancelled) return;
 
-        setLoading(true);
+      setLoading(true);
 
-        const collectionRef = await collection(db, docCollection);
+      const collectionRef = await collection(db, docCollection);
 
-        try {
+      try {
+        let q;
 
-            let q;
+        //busca
+        // dashboard
 
-            //busca
-            // dashboard
+        if (search) {
+          q = await query(
+            collectionRef,
+            where("tags", "array-contains", search),
+            orderBy("createdAt", "desc")
+          );
 
-            q = await query(collectionRef, orderBy("createdAt", "desc"));
-
-            await onSnapshot(q, (QuerySnapshot) => {
-              setDocuments(
-                QuerySnapshot.docs.map((doc) => ({
-                  id: doc.id,
-                  ...doc.data(),
-                }))
-              ); 
-            });
-
-            setLoading(false);
-            
-        } catch (error) {
-            console.log(error);
-            setError(error.message);
-
-            setLoading(false);
+          console.log(q, 'Busca if');
+        } else {
+          q = await query(collectionRef, orderBy("createdAt", "desc"));
+          console.log(q, "Busca else");
         }
+
+        await onSnapshot(q, (QuerySnapshot) => {
+          setDocuments(
+            QuerySnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }))
+          );
+        });
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setError(error.message);
+
+        setLoading(false);
+      }
     }
 
     loadData();

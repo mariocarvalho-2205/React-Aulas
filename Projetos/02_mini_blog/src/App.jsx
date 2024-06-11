@@ -20,6 +20,7 @@ import Log from "./pages/Login/Log.jsx";
 import Register from "./pages/Register/Register.jsx";
 import CreatePost from "./pages/CreatePost/CreatePost.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import Search from "./pages/Search/Search.jsx";
 
 function App() {
 
@@ -42,18 +43,32 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AuthProvider value={{ user }}>  {/* Aqui verifica se o usuario está logado  */}
+      <AuthProvider value={{ user }}>
+        {" "}
+        {/* Aqui verifica se o usuario está logado  */}
         <Navbar />
         <div className="container">
           <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/about" element={<About />}/>
-            <Route path="/login" element={!user ? <Log /> : <Navigate to="/" />}/>
-            <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />}/>
-            <Route path="/posts/create" element={user ? <CreatePost /> : <Navigate to="/login" />}/>
-            <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />}/>
-          {/* <Outlet /> */}
-
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/search" element={<Search />} />
+            <Route
+              path="/login"
+              element={!user ? <Log /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/register"
+              element={!user ? <Register /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/posts/create"
+              element={user ? <CreatePost /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/dashboard"
+              element={user ? <Dashboard /> : <Navigate to="/login" />}
+            />
+            {/* <Outlet /> */}
           </Routes>
         </div>
         <Footer />

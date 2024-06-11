@@ -25,7 +25,7 @@ const Log = () => {
     // pegar a resposta
     const res = await login(user);
 
-    console.log(user);
+    console.log(user.email, "Login");
     setEmail("");
     setPassword("");
   };

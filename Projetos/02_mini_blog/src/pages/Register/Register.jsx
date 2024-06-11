@@ -35,7 +35,7 @@ const Register = () => {
     // pegar a resposta 
     const res = await createUser(user)
 
-    console.log(user)
+    console.log(user, "Register")
     setDisplayName("")
     setEmail("")
     setPassword("")

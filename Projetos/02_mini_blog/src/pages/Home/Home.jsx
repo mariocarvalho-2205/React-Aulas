@@ -4,6 +4,7 @@ import styles from "./Home.module.css"
 import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useFetchDocuments } from '../../hooks/useFetchDocuments'
+import PostDetail from '../../../src/components/PostDetail/PostDetail'
 
 const Home = () => {
   const [query, setQuery] = useState("");
@@ -25,7 +26,7 @@ const Home = () => {
         <div>
           {loading && <p>Carregando...</p>}
           {posts && posts.map((post) => (
-            <h3 key={post.id}>{post.title}</h3>
+            <PostDetail post={post} key={post.id} />
 
           ))}
 

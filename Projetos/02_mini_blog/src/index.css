@@ -92,9 +92,9 @@ textarea {
   color: #fff;
 }
 
-.btn.btn-outline {
+/* .btn.btn-outline {
   background-color: #000;
-}
+} */
 
 .btn.btn-danger:hover {
   background-color: #dc3545;

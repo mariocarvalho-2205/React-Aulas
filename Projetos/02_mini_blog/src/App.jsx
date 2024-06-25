@@ -22,6 +22,7 @@ import CreatePost from "./pages/CreatePost/CreatePost.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import Search from "./pages/Search/Search.jsx";
 import Post from "./pages/Post/Post.jsx";
+import EditPost from "./pages/EditPost/EditPost.jsx";
 
 function App() {
 
@@ -65,6 +66,10 @@ function App() {
             <Route
               path="/posts/create"
               element={user ? <CreatePost /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/posts/edit/:id"
+              element={user ? <EditPost /> : <Navigate to="/login" />}
             />
             <Route
               path="/dashboard"

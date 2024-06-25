@@ -39,6 +39,13 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
           );
 
           console.log(q, 'Busca if');
+
+        } else if (uid){
+          q = await query(
+            collectionRef,
+            where("uid", "==", uid),
+            orderBy("createdAt", "desc")
+          );
         } else {
           q = await query(collectionRef, orderBy("createdAt", "desc"));
           console.log(q, "Busca else");
@@ -63,7 +70,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
     }
 
     loadData();
-  }, [docCollection, documents, search, uid, cancelled]);
+  }, [docCollection, search, uid, cancelled]);
 
   useEffect(() => {
     return () => {

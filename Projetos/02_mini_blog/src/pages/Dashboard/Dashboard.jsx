@@ -1,12 +1,16 @@
 import styles from "./Dashboard.module.css";
 import { Link, useNavigate } from "react-router-dom";
+
 import { useAuthValue } from "../../context/AuthContext";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
+import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user } = useAuthValue();
   const uid = user.uid;
+
+  const { deleteDocument } = useDeleteDocument("posts", uid);
 
   const {
     documents: posts,
@@ -14,9 +18,7 @@ const Dashboard = () => {
     error,
   } = useFetchDocuments("posts", null, uid);
 
-  const deleteDocument = async (id) => {
-    console.log('delete', id)
-  }
+
 
   if (loading) {
     return (

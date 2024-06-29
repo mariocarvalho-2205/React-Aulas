@@ -13,7 +13,7 @@ function App() {
     setCount(count + 1)
     console.log('Executou a função some')
   }
-  // sem dependencias ele executa somente 
+  // 1 - sem dependencias ele executa somente 
   // quando o componente e rerenderizado
 
   useEffect(() => {
@@ -21,17 +21,33 @@ function App() {
     console.log('Executou o useEffect puro')
   })
 
-  // e executado apenas uma vez
+  // 2 - e executado apenas uma vez
   useEffect(() => {
     somePuro()
     console.log('Executou o useEffect com array vaziu', puro)
   },[])
 
-  // e executado sempre que o count mudar
+  // 3 - e executado sempre que o count mudar
+  // useEffect(() => {
+  //   setCount + 1
+  //   console.log('Executou o useEffect com dependencias', count)
+  // }, [count])
+
+  // 4 - usando o cleanUp para garantir o funcionamento
+  // nao fazer pode gerar errors cou comportamentos indesejados
+  // o contador de pagina que pode continuar rodando quando a pagina for mudada
+
   useEffect(() => {
-    setCount + 1
-    console.log('Executou o useEffect com dependencias', count)
+    const timer = setTimeout(() => {
+      console.log('Executou o useEffect com cleanup')
+      //setCount(count + 1)
+      console.log('Executou o useEffect com dependencias', count)
+    }, 1000)
+    return () => {
+      clearTimeout(timer)
+    }
   }, [count])
+
   return (
     <>
       <h1>UseEffect</h1>

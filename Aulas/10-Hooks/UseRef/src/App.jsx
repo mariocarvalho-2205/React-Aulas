@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from'react'
-import './App.css'
+import { useState, useEffect, useRef } from "react";
+import "./App.css";
 
 function App() {
   const numberRef = useRef(0);
@@ -8,7 +8,10 @@ function App() {
 
   useEffect(() => {
     numberRef.current = numberRef.current + 1;
-  })
+  });
+
+  const inputRef = useRef();
+  const [text, setText ] = useState("") 
 
   return (
     <>
@@ -18,8 +21,12 @@ function App() {
       <button onClick={() => setNumber(number + 1)}>Somar Number 1 </button>
       <p>number 2 {number2}</p>
       <button onClick={() => setNumber2(number2 + 1)}>Somar Number 2 </button>
+      <br />
+      {/* useRef  e Dom */}
+      <input type="text" ref={inputRef} value={text}/>
+      <input type="submit" value="Enviar" />
     </>
   );
 }
 
-export default App
+export default App;

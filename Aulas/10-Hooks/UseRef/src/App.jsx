@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect, useRef } from'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const numberRef = useRef(0);
+  const [number, setNumber] = useState(0);
+  const [number2, setNumber2] = useState(0);
+
+  useEffect(() => {
+    numberRef.current = numberRef.current + 1;
+  })
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Use Ref</h1>
+      <p>useRef {numberRef.current}</p>
+      <p>number 1 {number}</p>
+      <button onClick={() => setNumber(number + 1)}>Somar Number 1 </button>
+      <p>number 2 {number2}</p>
+      <button onClick={() => setNumber2(number2 + 1)}>Somar Number 2 </button>
     </>
-  )
+  );
 }
 
 export default App

@@ -12,6 +12,12 @@ function App() {
 
   const inputRef = useRef();
   const [text, setText ] = useState("") 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(inputRef.current.value)
+    setText("")
+    inputRef.current.focus()
+  }
 
   return (
     <>
@@ -23,8 +29,9 @@ function App() {
       <button onClick={() => setNumber2(number2 + 1)}>Somar Number 2 </button>
       <br />
       {/* useRef  e Dom */}
-      <input type="text" ref={inputRef} value={text}/>
-      <input type="submit" value="Enviar" />
+
+      <input type="text" ref={inputRef} value={text} onChange={(e) => setText(e.target.value)} />
+      <input type="submit" value="Enviar" onClick={(e) => handleSubmit(e)}/>
     </>
   );
 }

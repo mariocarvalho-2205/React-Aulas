@@ -11,6 +11,13 @@ const app = express()
 app.use(express.json())  // habilitar json
 app.use(express.urlencoded({ extended: false}))  // habilitar form data para aceitar dados
 
+// Solve CORS
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+
+// Upload directory
+app.use("/uploads", express.static(path.join(__dirname, '/uploads')))
+
+
 // routes
 const router = require("./routes/Router.js")
 

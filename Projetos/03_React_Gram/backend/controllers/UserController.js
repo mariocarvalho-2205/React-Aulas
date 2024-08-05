@@ -7,48 +7,80 @@ const jwtSecret = process.env.JWT_SECRET;
 
 // Generate user token
 const generateToken = (id) => {
-  return jwt.sign({ id }, jwtSecret, {
-    expiresIn: "7d",
-  });
+	return jwt.sign({ id }, jwtSecret, {
+		expiresIn: "7d",
+	});
 };
 
 // Register User and sign in
 const register = async (req, res) => {
-  const { name, email, password } = req.body;
-  // checa se o usurario existe
-  const user = await User.findOne({ email }); // metodo do mongoose para pesquisar no banco de dados
+	// res.send('Registro')
+	const { name, email, password } = req.body;
 
-  if (user) {
-    // resposta da consulta
-    res.status(422).json({ errors: ["Por favor, utilize outro email!"] });
-    return;
-  }
+	// check if user exists
+	const user = await User.findOne({ email });
 
-  // gerando hash da senha
-  const salt = await bcrypt.genSalt(); // aqui gera a senha encriptada uma string aleatoria
-  const passwordHash = await bcrypt.hash(password, salt); // bcrypt.hash(gera a senha aleatoria + a senha que o usuario digitou)
+	if (user) {
+		res.status(422).json({ errors: ["Por favor, utilize outro e-mail"] });
+		return;
+	}
 
-  // criando o usuario
-  const newUser = await User.create({
-    name,
-    email,
-    password: passwordHash,  // aqui ele atribui a password a nova hash criada pelo sistema
-  });
+	// generate password hash
+	const salt = await bcrypt.genSalt();
+	const passwordHash = await bcrypt.hash(password, salt);
 
-  // se o usuario foi criado com sucesso
-  if (!newUser) {
-    res.status(422).json({ errors: ["Houve um erro, por favor tente mais tarde."]})
-    return;
-  }
+	// Create user
+	const newUser = await User.create({
+		name,
+		email,
+		password: passwordHash,
+	});
 
-  res.status(201).json({
-    _id: newUser._id,
-    token: generateToken(newUser._id),
-  })
+	// if user was created sucessfully, return the token
+	// verifica se o usuario nao foi criado com sucesso
+	if (!newUser) {
+		res.status(422).json({
+			errors: ["Houve um erro, por favor tente mais tarde!"],
+		});
+		return;
+	}
 
-  res.send("Registro");
+	res.status(201).json({
+		_id: newUser._id,
+		token: generateToken(newUser._id),
+	});
 };
 
+// Sign user in
+const login = async (req, res) => {
+    // res.send("Login")
+    const { email, password} = await req.body
+    const user = await User.findOne({email})
+
+    // check if user exists
+    if(!user) {
+        res.status(404).json({
+            errors: ["Usuario não encontrado."]
+        })
+        return
+    }
+
+    // check if password matches
+    if (!(await bcrypt.compare(password, user.password))) {
+        res.status(422).json({errors: ["Senha invalida!"]})
+        return
+    }
+
+    // return user with token
+    res.status(201).json({
+		_id: user._id,
+        profileImage: user.profileImage,
+		token: generateToken(user._id),
+	});
+
+}
+
 module.exports = {
-  register,
+	register,
+    login
 };

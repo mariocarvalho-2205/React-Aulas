@@ -18,5 +18,5 @@ const conn = async () => {
 
 conn()
 
-console.log('DB O')
+console.log('DB Arquivo')
 module.exports = conn;

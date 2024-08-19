@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const mongoose = require('mongoose')
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -99,14 +100,14 @@ const update = async (req, res) => {
 
   // pegar o usuario
   const reqUser = req.user;
-//   const user = await User.findById(
-//     new mongoose.Types.ObjectId(reqUser._id)
-//   ).select("-password");
+  //   const user = await User.findById(
+  //     new mongoose.Types.ObjectId(reqUser._id)
+  //   ).select("-password");
   const user = await User.findById(reqUser._id).select("-password");
-//   console.log(user, "Usuario em User controller Update")
+  //   console.log(user, "Usuario em User controller Update")
 
   if (!user) {
-	// console.log(user, "Usuario em User controller Update")
+    // console.log(user, "Usuario em User controller Update")
     return res.status(404).json({ errors: ["Usuário não encontrado."] });
   }
 
@@ -135,9 +136,29 @@ const update = async (req, res) => {
   res.status(200).json(user);
 };
 
+// Get user by id
+const getUserById = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const user = await User.findById(id).select("-password")
+    // check if user exists
+    if (!user) {
+      res.status(404).json({ errors: ["Usuario não encontrado 2"] })
+      return
+    }
+    res.status(200).json(user)
+    
+  } catch (error) {
+    res.status(404).json({errors: ["Usuario nao encontrado catch"]})    
+  }
+
+}
+
 module.exports = {
   register,
   login,
   getCurrentUser,
   update,
+  getUserById
 };

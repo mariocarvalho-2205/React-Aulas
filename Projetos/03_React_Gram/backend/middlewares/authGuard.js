@@ -6,7 +6,6 @@ const authGuard = async (req, res, next) => {
 
     const authHeader = req.headers["authorization"]
     const token = authHeader && authHeader.split(" ")[1]
-    console.log(authHeader)
 
     if(!token) {
         return res.status(401).json({errors: ["Acesso negado!"]})
@@ -16,13 +15,13 @@ const authGuard = async (req, res, next) => {
     try {
 
         const verified = jwt.verify(token, jwtSecret)
-
+        console.log(verified)
         req.user = await User.findById(verified.id).select("-password")
 
         next()
         
     } catch (error) {
-       res.status(401).json({ errors: ["Token invalido"]}) 
+       res.status(401).json({ errors: ["Token invalido authguard"]}) 
     }
 
 }

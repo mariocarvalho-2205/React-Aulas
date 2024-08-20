@@ -7,7 +7,11 @@ const photoSchema = new Schema(
         title: String,
         likes: Array,
         comments: Array,
-        userId: mongoose.ObjectID,
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User', // Refere-se ao modelo de usuário
+            required: true,
+        },
         userName: String
     },
     {

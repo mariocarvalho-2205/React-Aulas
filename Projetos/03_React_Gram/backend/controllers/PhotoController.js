@@ -3,10 +3,10 @@ const mongoose = require('mongoose')
 const User = require("../models/User");
 
 // Insert a photo, with an user related to it
-const insertPhoto = async(req, res) => {
+const insertPhoto = async (req, res) => {
 
     // dados do arquivo
-    const {title} = req.body
+    const { title } = req.body
     const image = req.file.filename
 
     const reqUser = req.user
@@ -23,12 +23,134 @@ const insertPhoto = async(req, res) => {
     })
 
     // if photo was created sucessfully, return data
-    if(!newPhoto) {
-        res.status(422).json({errors: ["Houve um problema, por favor tente novamente mais tarde."]})
+    if (!newPhoto) {
+        res.status(422).json({ errors: ["Houve um problema, por favor tente novamente mais tarde."] })
+        return
     }
     res.send(newPhoto)
 }
 
+// remove a photo from db
+const deletePhoto = async (req, res) => {
+    const { id } = req.params;
+    const reqUser = req.user;
+
+    try {
+        // Verificar se o ID da foto é válido
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).json({ errors: ["ID inválido!"] });
+            return;
+        }
+
+        const photo = await Photo.findById(id);
+
+        // Verificar se a foto existe
+        if (!photo) {
+            res.status(404).json({ errors: ["Foto não encontrada!"] });
+            return;
+        }
+
+        // Verificar se a foto pertence ao usuário
+        if (!photo.userId.equals(reqUser._id)) {
+            res.status(403).json({ errors: ["Você não tem permissão para deletar esta foto."] });
+            return;
+        }
+
+        await Photo.findByIdAndDelete(photo._id);
+
+        res.status(200).json({ id: photo._id, message: "Foto excluída com sucesso!" });
+    } catch (error) {
+        res.status(500).json({ errors: ["Erro ao deletar a foto. Por favor, tente novamente mais tarde."] });
+    }
+};
+
+// get all photos
+const getAllPhotos = async (req, res) => {
+    const photos = await Photo.find({})
+        .sort([['createdAt', -1]])
+        .exec()
+
+    return res.status(200).json(photos)
+}
+
+// get user photos
+const getUserPhotos = async (req, res) => {
+
+    // pegar o id da url
+    const { id } = req.params
+
+    const photos = await Photo.find({ userId: id })
+        .sort([['createdAt', -1]])
+        .exec()
+    return res.status(200).json(photos)
+}
+
+const getPhotoById = async (req, res) => {
+
+    // pegar id da photo
+    const { id } = req.params
+
+    try {
+        // check id is valid
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(404).json({ error: ["ID da Foto Invalido."] })
+            return
+        }
+
+        const photo = await Photo.findById(id)
+
+        if (!photo) {
+            res.status(404).json({ error: ["Foto não encontrada."] })
+        }
+        res.status(200).json(photo)
+    } catch (error) {
+        res.status(500).json({ errors: ["Erro ao localizar a foto. Por favor, tente novamente mais tarde."] });
+    }
+}
+
+const updatePhoto = async (req, res) => {
+    const { id } = req.params
+    const { title } = req.body
+
+    const reqUser = req.user
+
+    try {
+        // check id is valid
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(404).json({ error: ["ID da Foto Invalido."] })
+            return
+        }
+        // check if photo exists
+        const photo = await Photo.findById(id)
+
+        if (!photo) {
+            res.status(404).json({ error: ["Foto não encontrada."] })
+        }
+
+        // if photo belongs to user
+        if (!photo.userId.equals(reqUser._id)) {
+            res.status(422).json({ errors: ["Você não tem permissão para atualizar esta foto."] });
+            return;
+        }
+
+        if (title) {
+            photo.title = title
+        }
+
+        await photo.save()
+
+        res.status(200).json({ photo, message: "Foto atualizada com sucesso!"})
+
+    } catch (error) {
+        res.status(500).json({ errors: ["Erro ao deletar a foto. Por favor, tente novamente mais tarde."] });
+    }
+}
+
 module.exports = {
-    insertPhoto
+    insertPhoto,
+    deletePhoto,
+    getAllPhotos,
+    getUserPhotos,
+    getPhotoById,
+    updatePhoto
 }

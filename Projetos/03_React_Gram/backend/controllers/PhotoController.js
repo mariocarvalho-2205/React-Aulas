@@ -139,11 +139,101 @@ const updatePhoto = async (req, res) => {
 
         await photo.save()
 
-        res.status(200).json({ photo, message: "Foto atualizada com sucesso!"})
+        res.status(200).json({ photo, message: "Foto atualizada com sucesso!" })
 
     } catch (error) {
         res.status(500).json({ errors: ["Erro ao deletar a foto. Por favor, tente novamente mais tarde."] });
     }
+}
+
+// like a photo
+const likePhoto = async (req, res) => {
+    const { id } = req.params
+    const reqUser = req.user
+
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(404).json({ error: ["Id da foto invalida"] })
+            return
+        }
+
+        const photo = await Photo.findById(id)
+
+        if (!photo) {
+            res.status(422).json({ error: ["Foto nao encontrada."] })
+            return
+        }
+
+        // check if user already liked the photo
+        if (photo.likes.includes(reqUser._id)) {
+            res.status(422).json({ error: ["Você já curtiu a foto."] })
+            return
+        }
+
+        // Put user id in likes array
+        photo.likes.push(id)
+
+        photo.save()
+
+        res.status(200).json({ photoId: id, userId: reqUser._id, message: "A foto foi curtida!" })
+
+    } catch (error) {
+        res.status(500).json({ errors: ["Erro ao deletar a foto. Por favor, tente novamente mais tarde."] });
+
+    }
+}
+
+// Comment functionality
+const commentPhoto = async (req, res) => {
+    const { id } = req.params
+    const { comment } = req.body
+    const reqUser = req.user
+
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(404).json({ error: ["Id da foto invalida"] })
+            return
+        }
+
+        const user = await User.findById(reqUser._id)
+        const photo = await Photo.findById(id)
+
+        if (!photo) {
+            res.status(422).json({ error: ["Foto nao encontrada."] })
+            return
+        }
+        // Put comment in the array comments
+        const UserComment = {
+            comment,
+            userName: user.name,
+            userImage: user.profileImage,
+            userId: user._id,
+        }
+
+
+        photo.comments.push(UserComment)
+
+        await photo.save()
+
+        res.status(200).json({
+            comment: UserComment,
+            message: "O comentário adicionado com sucesso!"
+        })
+
+    } catch (error) {
+        res.status(500).json({ errors: ["Erro ao deletar a foto. Por favor, tente novamente mais tarde."] });
+
+    }
+}
+
+// Search photos by title
+
+const searchPhotos = async (req, res) => {
+    const {q} = req.query
+
+    const photos = await Photo.find({ title: new RegExp(q, 'i')}).exec()
+
+    res.status(200).json(photos)
 }
 
 module.exports = {
@@ -152,5 +242,8 @@ module.exports = {
     getAllPhotos,
     getUserPhotos,
     getPhotoById,
-    updatePhoto
+    updatePhoto,
+    likePhoto,
+    commentPhoto,
+    searchPhotos
 }

@@ -1,7 +1,7 @@
 import "./Auth.css"
 
 // Components
-import  { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Hooks
 import { useState, useEffect } from 'react';
@@ -14,15 +14,15 @@ const Login = () => {
 
     console.log('teste login')
   }
-  
+
   return (
-    <div>
+    <div id="login">
       <h2>ReactGram</h2>
       <p>Faça o login para ver as fotos dos seus amigos.</p>
       <form onSubmit={handleSubmit}>
         <input type="email" placeholder='Email' />
-        <input type="password" placeholder='Senha'/>
-        <input type="submit" value="Entrar"/>
+        <input type="password" placeholder='Senha' />
+        <input type="submit" value="Entrar" />
       </form>
       <p>Ja tem cadastro? <Link to="/register">Clique aqui.</Link></p>
     </div>

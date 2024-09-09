@@ -1,6 +1,6 @@
-import { method } from "lodash"
+// import { method } from "lodash"
 
-export const api = "http://loaclhost:5000/api"
+export const api = "http://localhost:5000/api"
 export const uploads = "http://localhost:5000/uploads"
 
 export const requestConfig = (method, data, token = null, image = null) => {

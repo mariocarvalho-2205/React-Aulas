@@ -40,6 +40,9 @@ const Register = () => {
     // setPassword('')
     // setConfirmPassword('')
   }
+  useEffect(()=> {
+    dispatch(reset())
+  }, [dispatch])
 
   return (
     <div id='register'>

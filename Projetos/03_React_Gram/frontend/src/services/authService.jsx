@@ -5,7 +5,7 @@ const register = async (data) => {
 
     try {
         console.log("Config em AuthServices" , config )
-        const res = await fetch(api + "")
+        const res = await fetch(api + "api/users/register", config)
         .then((res) => {
             res.json()
             console.log("resposta em register authService", res)

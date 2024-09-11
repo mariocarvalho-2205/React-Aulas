@@ -1,24 +1,17 @@
 import { api, requestConfig } from '../utils/config'
 
 const register = async (data) => {
-    const config = requestConfig("POST", data)
+    const config = requestConfig("POST", data);
 
     try {
-        console.log("Config em AuthServices" , config )
-        const res = await fetch(api + "api/users/register", config)
-        .then((res) => {
-            res.json()
-            console.log("resposta em register authService", res)
-        })
-        .catch((err) => {
-            err
-            console.log("Erro do catch em authServices", err)
-        })
-
+        // console.log("Config em AuthServices" , config, api )
+        const res = await fetch(api + "/users/register", config)
+        .then((res) => res.json())
+        .catch((err) => err)
         if(res) {
             localStorage.setItem("user", JSON.stringify(res))
         }
-        
+        return res;
     } catch (error) {
         console.log('error config em AuthService', error)
     }

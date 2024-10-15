@@ -14,14 +14,15 @@ import Register from "./pages/Auth/Register"
 // Components
 import Navbar from "./components/Navbar/Navbar"
 import Footer from "./components/Footer/Footer"
+import EditProfile from './pages/EditProfile/EditProfile'
 
 function App() {
 
   const { auth, loading } = useAuth()
-  console.log(auth, loading, 'auth e loading no app.jsx')
+  // console.log(auth, loading, 'auth e loading no app.jsx')
 
   if (loading) {
-    console.log(loading, 'dentro do if em app')
+    // console.log(loading, 'dentro do if em app')
     return <p>Carregando...</p>
   }
   return (
@@ -31,8 +32,9 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={auth ? <Home /> : <Navigate to="/login" />} />
-            <Route path="/login" element={!auth ? <Login /> : <Navigate to="/"/>} />
-            <Route path="/register" element={!auth ? <Register /> : <Navigate to="/"/>} />
+            <Route path="/profile" element={auth ? <EditProfile /> : <Navigate to="/login" />} />
+            <Route path="/login" element={!auth ? <Login /> : <Navigate to="/" />} />
+            <Route path="/register" element={!auth ? <Register /> : <Navigate to="/" />} />
           </Routes>
 
         </div>

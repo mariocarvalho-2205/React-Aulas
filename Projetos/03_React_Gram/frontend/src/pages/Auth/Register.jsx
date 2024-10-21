@@ -32,7 +32,7 @@ const Register = () => {
       password,
       confirmPassword
     }
-    console.log('teste register', user)
+    // console.log('teste register', user)
 
     dispatch(register(user))
 

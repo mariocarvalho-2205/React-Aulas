@@ -93,7 +93,7 @@ const EditProfile = () => {
 			<h2>Edite seus dados</h2>
 			<p>Adicione uma imagem de perfil e conta mais sobre você...</p>
 			{/* preview da imagem */}
-			{(user.profileImage || previewImage) && (
+			{(previewImage || (user && user.profileImage)) && (
 				<img
 					className="profile-image"
 					src={
@@ -101,7 +101,7 @@ const EditProfile = () => {
 							? URL.createObjectURL(previewImage)
 							: `${uploads}/users/${user.profileImage}`
 					}
-					alt={user.name}
+					alt={user?.name || "Profile Image"}
 				/>
 			)}
 			<form onSubmit={handleSubmit}>

@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const UserRoutes = require('./UserRoutes')
-router.use(UserRoutes)
+
+router.use('/api/users', UserRoutes)
 
 // Rota teste
 router.get('/test', (req, res) => {

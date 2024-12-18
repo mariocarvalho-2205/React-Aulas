@@ -49,12 +49,12 @@ module.exports = class UserController {
       res
         .status(201)
         .json({
-          message: "Usuario criado com sucesso!",
+          message: ["Usuario criado com sucesso!"],
           id: newUser._id,
           token: generateToken(newUser._id),
         });
     } catch (error) {
-      res.status(500).json({ errors: "houve algum erro no servidor!" });
+      res.status(500).json({ errors: ["houve algum erro no servidor!"] });
     }
   }
 };

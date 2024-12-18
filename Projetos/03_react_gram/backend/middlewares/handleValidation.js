@@ -5,7 +5,6 @@ const validate = (req, res, next) => {
     const errors = validationResult(req)
 
     if (errors.isEmpty()){
-        console.log('next in validation')
         return next()
     }
 
@@ -14,7 +13,7 @@ const validate = (req, res, next) => {
     
     errors.array().map((err) => extractedErros.push(err.msg))
     
-    console.log(extractedErros)
+    // console.log(extractedErros)
     
     return res.status(422).json({
         errors: extractedErros

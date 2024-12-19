@@ -2,7 +2,7 @@ const router = require("express").Router();
 const UserController = require("../controllers/UserController");
 
 const validate = require("../middlewares/handleValidation");
-const {userCreateValidation} = require("../middlewares/userValidations");
+const {userCreateValidation, userLoginValidation} = require("../middlewares/userValidations");
 
 router.post(
   "/register",
@@ -10,6 +10,8 @@ router.post(
   validate,
   UserController.register
 );
+
+router.post('/login', userLoginValidation(), validate, UserController.login)
 
 router.get("/", UserController.all);
 

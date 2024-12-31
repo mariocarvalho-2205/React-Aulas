@@ -3,6 +3,7 @@ const UserController = require("../controllers/UserController");
 
 const validate = require("../middlewares/handleValidation");
 const {userCreateValidation, userLoginValidation} = require("../middlewares/userValidations");
+const authGuard = require("../middlewares/authGuard")
 
 router.post(
   "/register",
@@ -11,7 +12,8 @@ router.post(
   UserController.register
 );
 
-router.post('/login', userLoginValidation(), validate, UserController.login)
+router.post("/login", userLoginValidation(), validate, UserController.login)
+router.get("/profile", authGuard, UserController.getCurrentUser)
 
 router.get("/", UserController.all);
 

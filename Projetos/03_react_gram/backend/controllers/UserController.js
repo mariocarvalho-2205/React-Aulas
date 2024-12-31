@@ -80,4 +80,9 @@ module.exports = class UserController {
       res.status(500).json({ message: ["Houve algum erro no servidor!"] });
     }
   }
+
+  static async getCurrentUser(req, res) {
+    const user = req.user
+    res.status(200).json(user)
+  }
 };

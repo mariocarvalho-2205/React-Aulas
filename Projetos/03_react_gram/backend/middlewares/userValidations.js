@@ -42,11 +42,25 @@ const userLoginValidation = () => {
       .isString()
       .withMessage("A senha é obrigatória!")
       .isLength({ min: 6 })
-      .withMessage("A senha precisa ter no minimo 6 caracteres!")
+      .withMessage("A senha precisa ter no minimo 6 caracteres!"),
+  ];
+};
+
+const userUpdateValidation = () => {
+  return [
+    body("name")
+      .optional()
+      .isLength({ min: 3 })
+      .withMessage("O nome precisa ter no minimo 3 caracteres!"),
+    body("password")
+      .optional()
+      .isLength({ min: 6 })
+      .withMessage("A senha precisa ter no minimo 6 caracteres!"),
   ];
 };
 
 module.exports = {
   userCreateValidation,
-  userLoginValidation
+  userLoginValidation,
+  userUpdateValidation,
 };

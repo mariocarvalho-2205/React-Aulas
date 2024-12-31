@@ -2,8 +2,9 @@ const router = require("express").Router();
 const UserController = require("../controllers/UserController");
 
 const validate = require("../middlewares/handleValidation");
-const {userCreateValidation, userLoginValidation} = require("../middlewares/userValidations");
+const {userCreateValidation, userLoginValidation, userUpdateValidation} = require("../middlewares/userValidations");
 const authGuard = require("../middlewares/authGuard")
+const imageUpload = require("../middlewares/imageUpload")
 
 router.post(
   "/register",
@@ -14,6 +15,7 @@ router.post(
 
 router.post("/login", userLoginValidation(), validate, UserController.login)
 router.get("/profile", authGuard, UserController.getCurrentUser)
+router.put("/", authGuard, userUpdateValidation(), validate, imageUpload.single("profileImage"), UserController.update)
 
 router.get("/", UserController.all);
 

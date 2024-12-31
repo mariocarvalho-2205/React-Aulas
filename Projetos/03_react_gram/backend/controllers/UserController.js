@@ -85,4 +85,14 @@ module.exports = class UserController {
     const user = req.user
     res.status(200).json(user)
   }
+
+  static async update(req, res) {
+    const { name, password, bio} = req.body
+    let profileImage = null
+
+    if(req.file) {
+      
+    }
+    res.status(200).json({ message: ['update']})
+  }
 };

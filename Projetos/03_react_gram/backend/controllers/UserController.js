@@ -99,7 +99,7 @@ module.exports = class UserController {
       const reqUser = req.user;
 
       if (!ObjectId.isValid(reqUser._id)) {
-        res.status(422).json({ message: "Id Invalido!!" });
+        res.status(422).json({ errors: ["Id Invalido!!"] });
         return;
       }
       const user = await User.findById(reqUser._id);
@@ -132,6 +132,29 @@ module.exports = class UserController {
       res
         .status(500)
         .json({ erros: ["Não foi possivél atualizar o usuario!", error] });
+    }
+  }
+
+  static async getUserById (req, res) {
+    const { id } = req.params
+    
+    if (!ObjectId.isValid(id)) {
+      res.status(422).json({errors: ["Id Invalido!!"]})
+      return
+    }
+
+    try {
+      
+      const user = await User.findById(id).select("-password");
+  
+      if (!user) {
+        res.status(400).json({errors: ["Usuário não encontrado!"]})
+        return
+      }
+  
+      res.status(200).json(user)
+    } catch (error) {
+      res.status(500).json({errors: ["Erro no servidor!"]})
     }
   }
 };

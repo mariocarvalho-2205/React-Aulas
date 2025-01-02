@@ -15,7 +15,7 @@ router.post(
 
 router.post("/login", userLoginValidation(), validate, UserController.login)
 router.get("/profile", authGuard, UserController.getCurrentUser)
-router.put("/", authGuard, userUpdateValidation(), validate, imageUpload.single("profileImage"), UserController.update)
+router.put("/", authGuard, imageUpload.single("profileImage"), userUpdateValidation(), validate, UserController.update)
 
 router.get("/", UserController.all);
 

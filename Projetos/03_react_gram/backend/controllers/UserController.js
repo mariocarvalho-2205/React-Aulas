@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
 
 const generateToken = require("../helpers/created-user-token");
+const ObjectId = require("mongoose").Types.ObjectId;
 // const generateToken = (id) => {
 //     return jwt.sign({id}, jwtSecret, {
 //         expiresIn: '1d',
@@ -64,9 +65,9 @@ module.exports = class UserController {
       return;
     }
 
-    if(!(await bcrypt.compare(password, user.password))) {
-      res.status(422).json({errors: ["Senha invalida!!"]})
-      return
+    if (!(await bcrypt.compare(password, user.password))) {
+      res.status(422).json({ errors: ["Senha invalida!!"] });
+      return;
     }
 
     try {
@@ -82,17 +83,55 @@ module.exports = class UserController {
   }
 
   static async getCurrentUser(req, res) {
-    const user = req.user
-    res.status(200).json(user)
+    const user = req.user;
+    res.status(200).json(user);
   }
 
   static async update(req, res) {
-    const { name, password, bio} = req.body
-    let profileImage = null
+    const { name, password, bio } = req.body;
 
-    if(req.file) {
-      
+    let profileImage = null;
+
+    if (req.file) {
+      profileImage = req.file.profileImage;
     }
-    res.status(200).json({ message: ['update']})
+    try {
+      const reqUser = req.user;
+
+      if (!ObjectId.isValid(reqUser._id)) {
+        res.status(422).json({ message: "Id Invalido!!" });
+        return;
+      }
+      const user = await User.findById(reqUser._id);
+
+      if (name) {
+        user.name = name;
+      }
+
+      if (password) {
+        const salt = await bcrypt.genSalt(12);
+        const passwordHash = await bcrypt.hash(password, salt);
+        user.password = passwordHash;
+      }
+
+
+      if (profileImage) {
+        user.profileImage = profileImage
+      }
+
+      if (bio) {
+        user.bio = bio;
+      }
+
+      await user.save();
+
+      res
+        .status(200)
+        .json({ message: ["Usuario atualizado com sucesso!", user] });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ erros: ["Não foi possivél atualizar o usuario!", error] });
+    }
   }
 };

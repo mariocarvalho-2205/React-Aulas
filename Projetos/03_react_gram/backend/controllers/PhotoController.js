@@ -126,9 +126,142 @@ module.exports = class PhotoController {
         return;
       }
 
-      res.status(200).json(photo)
+      res.status(200).json(photo);
     } catch (error) {
       res.status(500).json({ errors: ["Houve um erro, tente mais tarde!"] });
+    }
+  }
+
+  static async updatePhoto(req, res) {
+    const { id } = req.params;
+    const { title } = req.body;
+
+    const reqUser = req.user;
+    try {
+      if (!ObjectId.isValid(id)) {
+        res.status(422).json({ errors: ["Id Invalido!!"] });
+        return;
+      }
+      const photo = await Photo.findById(new ObjectId(id));
+
+      if (!photo) {
+        res.status(404).json({ errors: ["Fotos não encotrada!"] });
+        return;
+      }
+
+      if (!photo.userId.equals(reqUser._id)) {
+        res.status(422).json({
+          errors: [
+            "Ocorreu um erro, por favor tente mais tarde! update photo user diferente",
+          ],
+        });
+        return;
+      }
+
+      if (title) {
+        photo.title = title;
+      }
+
+      await photo.save();
+      res
+        .status(200)
+        .json({ photo, message: ["Foto atualizada com sucesso!"] });
+    } catch (error) {
+      res.status(500).json({ errors: ["Houve um erro, tente mais tarde!"] });
+    }
+  }
+
+  static async likePhoto(req, res) {
+    const { id } = req.params;
+    const reqUser = req.user;
+
+    try {
+      if (!ObjectId.isValid(id)) {
+        res.status(422).json({ errors: ["Id Invalido!!"] });
+        return;
+      }
+      const photo = await Photo.findById(new ObjectId(id));
+
+      if (!photo) {
+        res.status(404).json({ errors: ["Fotos não encotrada!"] });
+        return;
+      }
+
+      if (photo.likes.includes(reqUser._id)) {
+        res.status(422).json({
+          errors: ["Você já curtiu a foto!"],
+        });
+        return;
+      }
+
+      // put user id in likes array
+
+      photo.likes.push(reqUser._id);
+
+      await photo.save();
+      res
+        .status(200)
+        .json({
+          photoId: id,
+          userId: reqUser._id,
+          message: ["A foto foi curtida!"],
+        });
+    } catch (error) {
+      res.status(500).json({ errors: ["Houve um erro, tente mais tarde!"] });
+    }
+  }
+
+  static async commentPhoto(req, res) {
+    const { id } = req.params;
+
+    const { comment } = req.body;
+    const reqUser = req.user;
+
+    try {
+      if (!ObjectId.isValid(id)) {
+        res.status(422).json({ errors: ["Id Invalido!!"] });
+        return;
+      }
+
+      const user = await User.findById(new ObjectId(reqUser._id));
+      const photo = await Photo.findById(new ObjectId(id));
+
+      if (!photo) {
+        res.status(404).json({ errors: ["Fotos não encotrada!"] });
+        return;
+      }
+
+      // put comment in the array comments
+      const userComment = {
+        comment,
+        userName: user.name,
+        userImage: user.profileImage,
+        userId: user._id,
+      };
+      photo.comments.push(userComment);
+
+      await photo.save();
+      res
+        .status(200)
+        .json({
+          comment: userComment,
+          message: ["O comentario foi adicionado com sucesso!"],
+        });
+    } catch (error) {
+      res.status(500).json({ errors: ["Houve um erro, tente mais tarde!"] });
+    }
+  }
+
+  static async searchPhotos(req, res) {
+    const {q} = req.query
+
+    try {
+      const photos = await Photo.find({title: new RegExp(q, "i")}).exec()
+
+      res.status(200).json(photos)
+    } catch (error) {
+      res.status(500).json({ errors: ["Houve um erro, tente mais tarde!"] });
+      
     }
   }
 };

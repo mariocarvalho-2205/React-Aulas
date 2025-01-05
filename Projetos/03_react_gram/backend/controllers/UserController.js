@@ -93,7 +93,7 @@ module.exports = class UserController {
     let profileImage = null;
 
     if (req.file) {
-      profileImage = req.file.profileImage;
+      profileImage = req.file.filename;
     }
     try {
       const reqUser = req.user;
@@ -119,6 +119,7 @@ module.exports = class UserController {
         user.profileImage = profileImage
       }
 
+      console.log(profileImage)
       if (bio) {
         user.bio = bio;
       }

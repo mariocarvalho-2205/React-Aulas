@@ -1,5 +1,4 @@
-import dotenv from "dotenv"
-dotenv.config();
+import "./config.js"
 import express from "express";
 import cors from "cors";
 import path from "path"
@@ -27,7 +26,7 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
 
 // DB conections
 import conn from "./config/db.js"
-conn()
+
 
 
 app.use(router)

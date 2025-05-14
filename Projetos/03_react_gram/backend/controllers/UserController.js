@@ -18,7 +18,7 @@ const generateToken = (id) => {
 export const register = async (req, res) => {
     const { name, email, password} = await req.body
 
-    const user = {name, email, password}
-    console.log(name, email, password)
+    const user = await User.find({email})
+
     return res.status(200).json({message: "Registro", user})
 }

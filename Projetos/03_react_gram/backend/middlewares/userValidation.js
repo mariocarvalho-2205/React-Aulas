@@ -4,12 +4,13 @@ import { z } from "zod";
 export const UserCreateSchema = z
   .object({
     name: z
-      .string()
+      .string({ message: "O nome é obrigatório!" })
       .min(3, { message: "O nome precisa ter no minimo 3 caracteres" })
       .toLowerCase(),
-    email: z
+      email: z
       .string({ message: "O email é obrigatório!" })
-      .email({ message: "Insira um email valido!" }),
+      .email({ message: "Insira um email valido!" })
+      .toLowerCase(),
     password: z
       .string({ message: "A senha é obrigatória!" })
       .min(6, { message: "A senha precisa ter no minimo 6 numeros!" }),
@@ -18,11 +19,11 @@ export const UserCreateSchema = z
       .min(6, {
         message: "A confirmação de senha precisa ter no minimo 6 caracteres!",
       }),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: "As senhas não são iguais",
-        path: ["confirmPassword"],
-    });
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "As senhas não são iguais",
+    path: ["confirmPassword"],
+  });
 
 // Login User Validation
 export const UserLoginSchema = z.object({

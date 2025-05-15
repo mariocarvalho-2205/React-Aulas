@@ -16,6 +16,7 @@ const generateToken = (id) => {
   });
 };
 
+// register user
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -58,6 +59,7 @@ export const register = async (req, res) => {
   return res.status(200).json({ message: "Registro", passwordHash });
 };
 
+// login user
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -88,3 +90,16 @@ export const login = async (req, res) => {
     });
   }
 };
+
+// get current user
+export const getCurrentUser = async (req, res) => {
+  const user = req.user
+  console.log("controller", user)
+
+  try {
+    
+    return res.status(200).json({message: ["User Logado"], user})
+  } catch (error) {
+    return res.status(500).json({error: ["Erro no servidor"], error: error.errors})
+  }
+}

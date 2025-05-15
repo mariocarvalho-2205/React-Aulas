@@ -94,7 +94,7 @@ export const login = async (req, res) => {
 // get current user
 export const getCurrentUser = async (req, res) => {
   const user = req.user
-  console.log("controller", user)
+  // console.log("controller", user)  // debug ok
 
   try {
     

@@ -6,9 +6,24 @@ const userSchema = new Schema({
     email: String,
     password: String,
     profileImage: String,
-    bio: String
+    bio: String,
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: {
+        transform: (doc, ret) => {
+            if(ret.createdAt) {
+                ret.createdAt = new Date(ret.createdAt).toLocaleString("pt-BR", {
+                    timeZone: "America/Sao_Paulo"
+                })
+            }
+            if(ret.updatedAt) {
+                ret.updatedAt = new Date(ret.updatedAt).toLocaleString("pt-BR", {
+                    timeZone: "America/Sao_Paulo"
+                })
+            }
+            return ret
+        }
+    }
 })
 
 const User = mongoose.model("User", userSchema)

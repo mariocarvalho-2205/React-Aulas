@@ -45,5 +45,7 @@ export const UserUpdateSchema = z.object({
     .string({ message: "A senha é obrigatória!" })
     .min(6, { message: "A senha precisa ter no minimo 6 numeros!" }),
     // .optional(),  // Torna o campo opcional para atualizações
-
+  bio: z
+    .string({message: "A bio e muito importante"})
+    .optional()
 });//.partial();  // Isso torna todos os campos opcionais para o objeto;

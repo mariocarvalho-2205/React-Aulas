@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 const jwtSecret = process.env.JWT_SECRET;
 console.log(
@@ -93,17 +94,58 @@ export const login = async (req, res) => {
 
 // get current user
 export const getCurrentUser = async (req, res) => {
-  const user = req.user
+  const user = req.user;
   // console.log("controller", user)  // debug ok
 
   try {
-    
-    return res.status(200).json({message: ["User Logado"], user})
+    return res.status(200).json({ message: ["User Logado"], user });
   } catch (error) {
-    return res.status(500).json({error: ["Erro no servidor"], error: error.errors})
+    return res
+      .status(500)
+      .json({ error: ["Erro no servidor"], error: error.errors });
   }
-}
+};
 
 export const update = async (req, res) => {
-  res.send("Update")
-}
+  const { name, password, bio } = req.body;
+
+  let profileImage = null;
+
+  if (req.file) {
+    profileImage = req.file.filename;
+  }
+
+  try {
+    const reqUser = req.user;
+    //console.log("reqUser _id",reqUser._id)  // chegou ok
+    const user = await User.findById(reqUser._id).select("-password");
+    //console.log("update user", user) // chegou ok
+
+    if (name) {
+      user.name = name;
+    }
+
+    if (password) {
+      // Generate password hash
+      const salt = await bcrypt.genSalt(10);
+      const passwordHash = await bcrypt.hash(password, salt);
+      user.password = passwordHash;
+    }
+
+    if(profileImage) {
+      user.profileImage = profileImage
+    }
+
+    if (bio) {
+      user.bio = bio;
+    }
+
+    // console.log("user atualizado", user, bio)  // chegou ok
+    await user.save()
+
+    res.status(200).json({ message: ["Usuario atualizado com sucesso"], user });
+
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};

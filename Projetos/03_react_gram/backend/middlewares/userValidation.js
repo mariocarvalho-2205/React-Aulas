@@ -7,7 +7,7 @@ export const UserCreateSchema = z
       .string({ message: "O nome é obrigatório!" })
       .min(3, { message: "O nome precisa ter no minimo 3 caracteres" })
       .toLowerCase(),
-      email: z
+    email: z
       .string({ message: "O email é obrigatório!" })
       .email({ message: "Insira um email valido!" })
       .toLowerCase(),
@@ -34,3 +34,16 @@ export const UserLoginSchema = z.object({
     .string({ message: "A senha é obrigatória!" })
     .min(6, { message: "A senha precisa ter no minimo 6 numeros!" }),
 });
+
+export const UserUpdateSchema = z.object({
+  name: z
+    .string({ message: "O nome é obrigatório!" })
+    .min(3, { message: "O nome precisa ter no minimo 3 caracteres" })
+    .toLowerCase(),
+    // .optional(),  // Torna o campo opcional para atualizações
+  password: z
+    .string({ message: "A senha é obrigatória!" })
+    .min(6, { message: "A senha precisa ter no minimo 6 numeros!" }),
+    // .optional(),  // Torna o campo opcional para atualizações
+
+});//.partial();  // Isso torna todos os campos opcionais para o objeto;

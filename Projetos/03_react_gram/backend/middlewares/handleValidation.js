@@ -7,6 +7,7 @@ export const validateRequest = (schema) => {
             const validateData = schema.parse(req.body)   
 
             req.body = validateData
+            console.log(req.body)
 
             next()
         } catch (error) {

@@ -103,3 +103,7 @@ export const getCurrentUser = async (req, res) => {
     return res.status(500).json({error: ["Erro no servidor"], error: error.errors})
   }
 }
+
+export const update = async (req, res) => {
+  res.send("Update")
+}

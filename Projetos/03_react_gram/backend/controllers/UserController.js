@@ -106,6 +106,7 @@ export const getCurrentUser = async (req, res) => {
   }
 };
 
+// update current user
 export const update = async (req, res) => {
   const { name, password, bio } = req.body;
 
@@ -132,8 +133,8 @@ export const update = async (req, res) => {
       user.password = passwordHash;
     }
 
-    if(profileImage) {
-      user.profileImage = profileImage
+    if (profileImage) {
+      user.profileImage = profileImage;
     }
 
     if (bio) {
@@ -141,11 +142,33 @@ export const update = async (req, res) => {
     }
 
     // console.log("user atualizado", user, bio)  // chegou ok
-    await user.save()
+    await user.save();
 
     res.status(200).json({ message: ["Usuario atualizado com sucesso"], user });
-
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+
+// get user by id
+export const getUserById = async (req, res) => {
+  const { id } = req.params;
+
+  // console.log("User id - ", id)  // chegou
+
+  try {
+    const user = await User.findById(id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ errors: ["Usuário não encontrado!"] });
+    }
+
+    return res.status(200).json({ message: ["User by id"], user });
+  
+  } catch (error) {
+    // Este bloco captura erros de formato inválido de ID
+    return res
+      .status(404)
+      .json({ errors: ["ID inválido"] });
   }
 };
